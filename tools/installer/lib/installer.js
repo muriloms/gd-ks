@@ -206,21 +206,21 @@ export class Installer {
     const ide = this.config.ide || 'cursor';
     
     switch (ide) {
-      case 'cursor':
-        await this.installCursorConfig();
-        break;
-      case 'windsurf':
-        await this.installWindsurfConfig();
-        break;
-      case 'vscode':
-        await this.installVSCodeConfig();
-        break;
-      case 'claude-code':
-        await this.installClaudeCodeConfig();
-        break;
-      default:
-        // No IDE config to install
-        break;
+    case 'cursor':
+      await this.installCursorConfig();
+      break;
+    case 'windsurf':
+      await this.installWindsurfConfig();
+      break;
+    case 'vscode':
+      await this.installVSCodeConfig();
+      break;
+    case 'claude-code':
+      await this.installClaudeCodeConfig();
+      break;
+    default:
+      // No IDE config to install
+      break;
     }
   }
 

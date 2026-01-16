@@ -267,7 +267,7 @@ function showInstallationSummary(config, result) {
     totalAgents += agentCount;
     console.log(`     ${chalk.green('✓')} ${module.name.padEnd(20)} ${chalk.gray(`(${agentCount} agents)`)}`);
   }
-  console.log(chalk.gray(`  ─────────────────────────────────────────────────────`));
+  console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
   console.log(`     ${chalk.white('Total:')} ${totalAgents} agents ready`);
   console.log('');
 
@@ -303,7 +303,7 @@ function showInstallationSummary(config, result) {
     console.log(`     1. Open your project in ${chalk.cyan('Cursor')}, ${chalk.cyan('Windsurf')}, or ${chalk.cyan('VS Code')}`);
     console.log(`     2. Add ${chalk.yellow('_gdks/core/agents/gdks-master.md')} to your AI context`);
     console.log(`     3. Type ${chalk.yellow('*init')} to initialize your project`);
-    console.log(`     4. Follow the agent's guidance!`);
+    console.log('     4. Follow the agent\'s guidance!');
   }
   console.log('');
   
