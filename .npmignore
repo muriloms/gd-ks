@@ -1,0 +1,27 @@
+# Development files
+node_modules/
+.git/
+.gitignore
+.npmignore
+.eslintrc*
+eslint.config.js
+prettier.config.js
+.prettierrc*
+
+# Documentation (keep README, LICENSE, CHANGELOG)
+docs/NPM-PUBLISH-GUIDE.md
+
+# Samples
+samples/
+
+# Test files
+*.test.js
+__tests__/
+coverage/
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store

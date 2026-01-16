@@ -3,11 +3,18 @@
  * Main installation logic
  */
 
-import { join } from 'path';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { ModuleManager } from './module-manager.js';
 import { FileManager } from './file-manager.js';
 import { AgentCompiler } from './agent-compiler.js';
 import { ManifestGenerator } from './manifest-generator.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Path to IDE configs
+const IDE_CONFIGS_PATH = join(__dirname, '..', '..', '..', 'src', 'ide-configs');
 
 export class Installer {
   constructor(options = {}) {
@@ -60,10 +67,17 @@ export class Installer {
       progressCallback('Creating output directories...');
       await this.createOutputDirectories();
 
+      // Step 8: Install IDE configuration
+      if (this.config.ide && this.config.ide !== 'none') {
+        progressCallback(`Installing ${this.config.ide} configuration...`);
+        await this.installIdeConfig();
+      }
+
       return {
         success: true,
         gdksDir: this.gdksDir,
-        outputDir: this.outputDir
+        outputDir: this.outputDir,
+        ide: this.config.ide
       };
 
     } catch (error) {
@@ -127,7 +141,8 @@ export class Installer {
       },
       settings: {
         output_folder: this.config.outputFolder || '_gdks-output',
-        communication_language: this.config.language || 'en'
+        communication_language: this.config.language || 'en',
+        ide: this.config.ide || 'cursor'
       },
       modules: {
         installed: ['core', ...(this.config.modules || [])]
@@ -151,7 +166,8 @@ export class Installer {
       config: {
         projectName: this.config.projectName,
         language: this.config.language,
-        outputFolder: this.config.outputFolder
+        outputFolder: this.config.outputFolder,
+        ide: this.config.ide
       }
     });
 
@@ -180,6 +196,113 @@ export class Installer {
     // Create .gitkeep files
     for (const dir of outputDirs.slice(1)) {
       await this.fileManager.writeFile(join(dir, '.gitkeep'), '');
+    }
+  }
+
+  /**
+   * Install IDE-specific configuration files
+   */
+  async installIdeConfig() {
+    const ide = this.config.ide || 'cursor';
+    
+    switch (ide) {
+      case 'cursor':
+        await this.installCursorConfig();
+        break;
+      case 'windsurf':
+        await this.installWindsurfConfig();
+        break;
+      case 'vscode':
+        await this.installVSCodeConfig();
+        break;
+      case 'claude-code':
+        await this.installClaudeCodeConfig();
+        break;
+      default:
+        // No IDE config to install
+        break;
+    }
+  }
+
+  /**
+   * Install Cursor IDE configuration
+   */
+  async installCursorConfig() {
+    const cursorRulesDir = join(this.targetDir, '.cursor', 'rules', 'gdks');
+    await this.fileManager.ensureDir(cursorRulesDir);
+
+    // Copy all .mdc files from cursor config
+    const sourceDir = join(IDE_CONFIGS_PATH, 'cursor', 'rules');
+    
+    if (await this.fileManager.exists(sourceDir)) {
+      const files = await this.fileManager.listFiles(sourceDir, '.mdc');
+      
+      for (const file of files) {
+        await this.fileManager.copy(
+          join(sourceDir, file),
+          join(cursorRulesDir, file)
+        );
+      }
+    }
+  }
+
+  /**
+   * Install Windsurf IDE configuration
+   */
+  async installWindsurfConfig() {
+    const windsurfDir = join(this.targetDir, '.windsurf');
+    await this.fileManager.ensureDir(windsurfDir);
+
+    const sourceFile = join(IDE_CONFIGS_PATH, 'windsurf', 'gdks-rules.md');
+    
+    if (await this.fileManager.exists(sourceFile)) {
+      await this.fileManager.copy(
+        sourceFile,
+        join(windsurfDir, 'gdks-rules.md')
+      );
+    }
+  }
+
+  /**
+   * Install VS Code configuration
+   */
+  async installVSCodeConfig() {
+    const vscodeDir = join(this.targetDir, '.vscode');
+    await this.fileManager.ensureDir(vscodeDir);
+
+    // Copy settings and README
+    const sourceDir = join(IDE_CONFIGS_PATH, 'vscode');
+    
+    if (await this.fileManager.exists(sourceDir)) {
+      const files = await this.fileManager.listFiles(sourceDir);
+      
+      for (const file of files) {
+        await this.fileManager.copy(
+          join(sourceDir, file),
+          join(vscodeDir, file.replace('gdks-', ''))
+        );
+      }
+    }
+  }
+
+  /**
+   * Install Claude Code configuration
+   */
+  async installClaudeCodeConfig() {
+    const claudeDir = join(this.targetDir, '.claude', 'commands', 'gdks');
+    await this.fileManager.ensureDir(claudeDir);
+
+    const sourceDir = join(IDE_CONFIGS_PATH, 'claude-code', 'commands');
+    
+    if (await this.fileManager.exists(sourceDir)) {
+      const files = await this.fileManager.listFiles(sourceDir, '.md');
+      
+      for (const file of files) {
+        await this.fileManager.copy(
+          join(sourceDir, file),
+          join(claudeDir, file)
+        );
+      }
     }
   }
 

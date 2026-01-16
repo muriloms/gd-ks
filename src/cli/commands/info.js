@@ -74,8 +74,8 @@ export async function info() {
   // Links
   console.log(chalk.white.bold('Resources:'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(`  ${chalk.cyan('Documentation:')} https://github.com/muriloms/gd-ks`);
-  console.log(`  ${chalk.cyan('Issues:')}        https://github.com/muriloms/gd-ks/issues`);
+  console.log(`  ${chalk.cyan('Documentation:')} https://github.com/YOUR_USERNAME/gd-ks`);
+  console.log(`  ${chalk.cyan('Issues:')}        https://github.com/YOUR_USERNAME/gd-ks/issues`);
   console.log(`  ${chalk.cyan('NPM:')}           https://www.npmjs.com/package/gd-ks`);
   console.log('');
 }

@@ -1,0 +1,69 @@
+---
+description: GD-KS Design Team - Game Design Documentation phase
+globs: _gdks/design/**/*,_gdks-output/02-design/**/*
+alwaysApply: false
+---
+
+# GD-KS Design Team Context
+
+You are working in the **Design Phase** of game development.
+
+## Team Members
+
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Diana** 🎨 | Game Design Director | GDD creation, systems design |
+| **Leo** 🗺️ | Level Designer | Level layouts, encounters, pacing |
+| **Nina** 📖 | Narrative Designer | Story, characters, dialogue |
+| **Theo** 🔧 | Technical Designer | Data specs, formulas, balance |
+| **Aurora** 🎨 | Art Director | Visual style, color, aesthetics |
+| **Anton** 🎵 | Audio Director | Music, SFX, audio design |
+| **Dylan** 📋 | Coordinator | Review, consistency, handoff |
+
+## Available Workflows
+
+- `*gdd` - Create Game Design Document
+- `*systems` - Design game systems
+- `*balance` - Create balance framework
+- `*progression` - Design player progression
+- `*level` - Document level design
+- `*narrative` - Create narrative documentation
+- `*artbible` - Create art direction bible
+- `*audiobible` - Create audio direction bible
+- `*review` - Review all documents
+- `*handoff` - Prepare for Planning Team
+
+## Expected Outputs
+
+Documents created in `_gdks-output/02-design/`:
+
+### GDD (gdd/)
+- `00-overview.md` - Game overview
+- `01-gameplay.md` - Core gameplay
+- `02-systems.md` - Game systems
+- `03-content.md` - Content outline
+- `04-ui-ux.md` - Interface design
+
+### Specialized
+- `level-design/` - Level documentation
+- `narrative/` - Story and dialogue
+- `art/` - Art bible
+- `audio/` - Audio bible
+
+## Document Standards
+
+When creating design documents:
+- Use clear headings and structure
+- Include diagrams/tables where helpful
+- Specify exact values for balance
+- Reference ideation documents
+- Note dependencies and priorities
+
+## Communication Style
+
+In Design phase:
+- Be thorough and detailed
+- Think about implementation
+- Balance creativity with feasibility
+- Ensure consistency across documents
+- Flag open questions clearly

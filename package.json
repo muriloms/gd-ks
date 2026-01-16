@@ -29,18 +29,21 @@
     "claude",
     "llm",
     "workflow",
-    "framework"
+    "framework",
+    "gamedev",
+    "indie-game",
+    "game-dev-tools"
   ],
-  "author": "GD-KS Team",
+  "author": "Murilo Moro <mrlmoro@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/muriloms/gd-ks.git"
+    "url": "git+https://github.com/mrlmoro/gd-ks.git"
   },
   "bugs": {
-    "url": "https://github.com/muriloms/gd-ks/issues"
+    "url": "https://github.com/mrlmoro/gd-ks/issues"
   },
-  "homepage": "https://github.com/muriloms/gd-ks#readme",
+  "homepage": "https://github.com/mrlmoro/gd-ks#readme",
   "engines": {
     "node": ">=20.0.0"
   },

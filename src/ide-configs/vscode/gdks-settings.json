@@ -1,0 +1,29 @@
+{
+  "gdks.enabled": true,
+  "gdks.version": "0.1.0",
+  "gdks.outputFolder": "_gdks-output",
+  "gdks.teams": {
+    "ideation": {
+      "agents": ["concept-brainstormer", "market-analyst", "mechanics-explorer", "ideation-coordinator"],
+      "outputFolder": "01-ideation"
+    },
+    "design": {
+      "agents": ["game-design-director", "level-designer", "narrative-designer", "technical-game-designer", "art-director", "audio-director", "design-coordinator"],
+      "outputFolder": "02-design"
+    },
+    "planning": {
+      "agents": ["scrum-master", "technical-producer", "documentation-specialist", "planning-coordinator"],
+      "outputFolder": "03-planning"
+    },
+    "engine": {
+      "agents": ["ue5-architect", "ue5-programmer-lead", "ue5-systems-specialist", "ue5-blueprint-specialist", "engine-coordinator"],
+      "outputFolder": "04-engine"
+    }
+  },
+  "gdks.commands": {
+    "*help": "Show available commands",
+    "*init": "Initialize project",
+    "*status": "Check workflow progress",
+    "*teams": "View all teams and agents"
+  }
+}

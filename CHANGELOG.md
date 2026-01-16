@@ -1,90 +1,54 @@
 # Changelog
 
-All notable changes to the GD-KS (Game Development Knowledge System) will be documented in this file.
+All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0-alpha.1] - 2026-01-16
+
+### Added
+- Initial alpha release
+- Core installation system with interactive wizard
+- 21 specialized AI agents across 4 teams:
+  - **Ideation Team** (4 agents): Sparky, Marcus, Mira, Ivy
+  - **Design Team** (7 agents): Diana, Leo, Nina, Theo, Aurora, Anton, Dylan
+  - **Planning Team** (4 agents): Sam, Tina, Dana, Peter
+  - **Engine Team** (5 agents): Ulysses, Priscilla, Simon, Bella, Eric
+- Agent compilation system (YAML → Markdown)
+- Workflow system with instructions and templates
+- IDE configuration support:
+  - Cursor (.cursor/rules/gdks/*.mdc)
+  - Windsurf (.windsurf/gdks-rules.md)
+  - VS Code (.vscode/)
+  - Claude Code (.claude/commands/gdks/)
+- Core workflows:
+  - workflow-init: Project initialization
+  - workflow-status: Progress tracking
+  - party-mode: Multi-agent collaboration
+- Ideation workflows:
+  - brainstorm-concept
+  - market-analysis
+  - mechanics-exploration
+  - find-hook
+  - scope-analysis
+  - concept-synthesis
+  - concept-validation
+  - handoff-to-design
+- Document templates for each workflow
+- Multi-language support (en, pt-BR, es)
+- Development tracks (Quick, Standard, Full)
+
+### Technical
+- Node.js 20+ required
+- ES Modules throughout
+- Dependencies: chalk, commander, fs-extra, inquirer, js-yaml, ora
+
 ## [Unreleased]
 
-### Added
-- Initial project structure
-- CLI foundation with Commander.js
-- Basic install command structure
-
----
-
-## [0.1.0-alpha.1] - 2025-01-16
-
-### Added
-- 🎉 Initial release of GD-KS
-- Project foundation and repository structure
-- Package.json configuration for NPM publishing
-- Basic CLI entry point
-- MIT License
-
-### Project Structure
-```
-gd-ks/
-├── bin/           # CLI executables
-├── src/           # Source code
-│   ├── core/      # Core system
-│   └── modules/   # Feature modules
-├── tools/         # Build and install tools
-├── docs/          # Documentation
-└── samples/       # Example projects
-```
-
-### Planned Modules
-- **Core**: Base system, workflow engine, agent compiler
-- **Ideation**: Brainstorming and concept development (4 agents)
-- **Design**: Game design documentation (7 agents)
-- **Planning**: Sprint and project management (4 agents)
-- **Engine**: Unreal Engine 5 implementation (5 agents)
-
----
-
-## Version History
-
-| Version | Date | Description |
-|---------|------|-------------|
-| 0.1.0-alpha.1 | 2025-01-16 | Initial alpha release |
-
----
-
-## Roadmap
-
-### v0.1.0 (Alpha)
-- [ ] Core system implementation
-- [ ] Ideation module (Team 1)
-- [ ] Basic installation flow
-
-### v0.2.0 (Alpha)
-- [ ] Design module (Team 2)
-- [ ] GDD generation system
-- [ ] Game type templates
-
-### v0.3.0 (Alpha)
-- [ ] Planning module (Team 3)
-- [ ] Sprint management
-- [ ] Story templates
-
-### v0.4.0 (Alpha)
-- [ ] Engine module (Team 4)
-- [ ] UE5 knowledge base
-- [ ] LLM prompt generation
-
-### v0.5.0 (Beta)
-- [ ] Full integration
-- [ ] Party mode
-- [ ] Quick flow track
-
-### v1.0.0 (Release)
-- [ ] Complete documentation
-- [ ] Stable API
-- [ ] Production ready
-
----
-
-[Unreleased]: https://github.com/muriloms/gd-ks/compare/v0.1.0-alpha.1...HEAD
-[0.1.0-alpha.1]: https://github.com/muriloms/gd-ks/releases/tag/v0.1.0-alpha.1
+### Planned
+- Enhanced workflow instructions
+- More document templates
+- Web bundles for ChatGPT/Gemini
+- Custom agent creation guide
+- UE5 code generation prompts

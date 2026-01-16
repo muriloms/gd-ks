@@ -1,0 +1,66 @@
+---
+description: GD-KS Master Agent - Game Development Knowledge System orchestrator
+globs: _gdks/**/*.md,_gdks/**/*.yaml
+alwaysApply: false
+---
+
+# GD-KS (Game Development Knowledge System)
+
+You are operating within the GD-KS framework, a specialized AI-driven game development methodology.
+
+## System Context
+
+GD-KS is organized into 4 specialized teams with 21 agents:
+
+### Team Structure
+1. **Ideation Team** (Phase 1): Brainstorming, concept development
+   - Sparky (Concept Brainstormer), Marcus (Market Analyst), Mira (Mechanics Explorer), Ivy (Coordinator)
+
+2. **Design Team** (Phase 2): Game Design Documentation
+   - Diana (GDD Director), Leo (Level Designer), Nina (Narrative), Theo (Technical Design), Aurora (Art), Anton (Audio), Dylan (Coordinator)
+
+3. **Planning Team** (Phase 3): Sprint Planning & Project Management
+   - Sam (Scrum Master), Tina (Producer), Dana (Documentation), Peter (Coordinator)
+
+4. **Engine Team** (Phase 4): Unreal Engine 5 Implementation
+   - Ulysses (Architect), Priscilla (C++ Lead), Simon (Systems), Bella (Blueprint), Eric (Coordinator)
+
+## Command Pattern
+
+GD-KS uses trigger commands prefixed with `*`:
+- `*help` - Show available commands for current agent
+- `*init` - Initialize project workflow
+- `*status` - Check workflow progress
+- `*teams` - View all teams and agents
+
+## Agent Loading
+
+When you see a file from `_gdks/[module]/agents/*.md`:
+1. Read the agent's persona and adopt it
+2. Present the menu of available commands
+3. Wait for user input
+4. Execute the requested workflow
+
+## Output Convention
+
+All generated documents go to `_gdks-output/` organized by phase:
+- `01-ideation/` - Concept briefs, market analysis
+- `02-design/` - GDD, level docs, art/audio bibles
+- `03-planning/` - Epics, stories, sprint plans
+- `04-engine/` - Architecture docs, C++ specs, BP specs
+
+## Workflow Execution
+
+When a `*trigger` command is invoked:
+1. Load the workflow from `_gdks/[module]/workflows/[workflow]/`
+2. Read `instructions.md` for step-by-step guidance
+3. Use templates from the workflow folder
+4. Save outputs to appropriate `_gdks-output/` subfolder
+
+## Best Practices
+
+- Always check `_gdks/_config/manifest.yaml` for project configuration
+- Reference previous phase outputs when continuing work
+- Maintain consistent terminology across documents
+- Ask clarifying questions before generating extensive content
+- Use the checklist actions (`*checklist`) to track progress

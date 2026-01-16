@@ -122,6 +122,19 @@ async function promptConfiguration(options) {
       default: 'en'
     },
     {
+      type: 'list',
+      name: 'ide',
+      message: '🖥️  Which IDE are you using?',
+      choices: [
+        { name: 'Cursor (recommended)', value: 'cursor' },
+        { name: 'Windsurf', value: 'windsurf' },
+        { name: 'VS Code (with Copilot/Continue)', value: 'vscode' },
+        { name: 'Claude Code', value: 'claude-code' },
+        { name: 'None / Other', value: 'none' }
+      ],
+      default: 'cursor'
+    },
+    {
       type: 'input',
       name: 'outputFolder',
       message: '📁 Output folder for generated documents?',
@@ -191,6 +204,7 @@ export async function install(options) {
     modules: config.modules,
     language: config.language,
     outputFolder: config.outputFolder,
+    ide: config.ide,
     installerVersion: '0.1.0-alpha.1'
   });
 
@@ -240,6 +254,7 @@ function showInstallationSummary(config, result) {
   console.log(`     ${chalk.cyan('Location:')}    ${result.gdksDir}`);
   console.log(`     ${chalk.cyan('Output:')}      ${result.outputDir}`);
   console.log(`     ${chalk.cyan('Language:')}    ${config.language}`);
+  console.log(`     ${chalk.cyan('IDE:')}         ${config.ide || 'none'}`);
   console.log('');
   
   console.log(chalk.white('  📦 Installed Modules'));
@@ -255,13 +270,41 @@ function showInstallationSummary(config, result) {
   console.log(chalk.gray(`  ─────────────────────────────────────────────────────`));
   console.log(`     ${chalk.white('Total:')} ${totalAgents} agents ready`);
   console.log('');
+
+  // Show IDE-specific info
+  if (config.ide && config.ide !== 'none') {
+    console.log(chalk.white('  🖥️  IDE Configuration'));
+    console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
+    
+    const ideInfo = {
+      'cursor': { folder: '.cursor/rules/gdks/', activation: 'Rules auto-apply when editing _gdks/ files' },
+      'windsurf': { folder: '.windsurf/', activation: 'Load gdks-rules.md in AI context' },
+      'vscode': { folder: '.vscode/', activation: 'See README.md for setup instructions' },
+      'claude-code': { folder: '.claude/commands/gdks/', activation: 'Use /gdks commands' }
+    };
+    
+    const info = ideInfo[config.ide];
+    if (info) {
+      console.log(`     ${chalk.cyan('Config folder:')} ${info.folder}`);
+      console.log(`     ${chalk.cyan('Activation:')}    ${info.activation}`);
+    }
+    console.log('');
+  }
   
   console.log(chalk.white('  🚀 Next Steps'));
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  console.log(`     1. Open your project in ${chalk.cyan('Cursor')}, ${chalk.cyan('Windsurf')}, or ${chalk.cyan('VS Code')}`);
-  console.log(`     2. Add ${chalk.yellow('_gdks/core/agents/gdks-master.md')} to your AI context`);
-  console.log(`     3. Type ${chalk.yellow('*init')} to initialize your project`);
-  console.log(`     4. Follow the agent's guidance!`);
+  
+  if (config.ide === 'cursor') {
+    console.log(`     1. Open this project in ${chalk.cyan('Cursor')}`);
+    console.log(`     2. The GD-KS rules will auto-apply for ${chalk.yellow('_gdks/')} files`);
+    console.log(`     3. Open ${chalk.yellow('_gdks/core/agents/gdks-master.md')}`);
+    console.log(`     4. Type ${chalk.yellow('*init')} in chat to start!`);
+  } else {
+    console.log(`     1. Open your project in ${chalk.cyan('Cursor')}, ${chalk.cyan('Windsurf')}, or ${chalk.cyan('VS Code')}`);
+    console.log(`     2. Add ${chalk.yellow('_gdks/core/agents/gdks-master.md')} to your AI context`);
+    console.log(`     3. Type ${chalk.yellow('*init')} to initialize your project`);
+    console.log(`     4. Follow the agent's guidance!`);
+  }
   console.log('');
   
   console.log(chalk.white('  💡 Quick Reference'));
@@ -273,7 +316,7 @@ function showInstallationSummary(config, result) {
   console.log('');
   
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  console.log(chalk.gray(`  Documentation: ${chalk.cyan('https://github.com/muriloms/gd-ks')}`));
-  console.log(chalk.gray(`  Issues: ${chalk.cyan('https://github.com/muriloms/gd-ks/issues')}`));
+  console.log(chalk.gray(`  Documentation: ${chalk.cyan('https://github.com/mrlmoro/gd-ks')}`));
+  console.log(chalk.gray(`  Issues: ${chalk.cyan('https://github.com/mrlmoro/gd-ks/issues')}`));
   console.log('');
 }
