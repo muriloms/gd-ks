@@ -1,0 +1,6 @@
+name: handoff-to-design
+description: handoff-to-design workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

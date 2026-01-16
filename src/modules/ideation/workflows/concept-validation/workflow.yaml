@@ -1,0 +1,6 @@
+name: concept-validation
+description: concept-validation workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

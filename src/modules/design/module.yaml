@@ -1,0 +1,25 @@
+# GD-KS Design Module
+# Team 2: Game Design, Level Design, Narrative, Art, Audio
+
+name: design
+version: 0.1.0
+description: Design Team - Game design documentation and direction
+
+required: false
+default_selected: true
+
+agents:
+  - game-design-director
+  - level-designer
+  - narrative-designer
+  - technical-game-designer
+  - art-director
+  - audio-director
+  - design-coordinator
+
+workflows:
+  - create-gdd
+  - level-documentation
+  - narrative-design
+  - art-bible
+  - audio-bible

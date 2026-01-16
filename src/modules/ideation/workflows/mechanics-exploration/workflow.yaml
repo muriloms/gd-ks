@@ -1,0 +1,6 @@
+name: mechanics-exploration
+description: mechanics-exploration workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

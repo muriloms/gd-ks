@@ -1,0 +1,6 @@
+name: concept-synthesis
+description: concept-synthesis workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

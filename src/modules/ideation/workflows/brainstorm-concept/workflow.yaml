@@ -1,0 +1,6 @@
+name: brainstorm-concept
+description: brainstorm-concept workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

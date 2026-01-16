@@ -1,0 +1,21 @@
+# GD-KS Ideation Module
+# Team 1: Brainstorming, concept development, market analysis
+
+name: ideation
+version: 0.1.0
+description: Ideation Team - Brainstorming and concept development
+
+required: false
+default_selected: true
+
+agents:
+  - concept-brainstormer
+  - market-analyst
+  - mechanics-explorer
+  - ideation-coordinator
+
+workflows:
+  - brainstorm-concept
+  - market-analysis
+  - find-hook
+  - scope-analysis

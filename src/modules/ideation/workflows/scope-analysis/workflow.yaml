@@ -1,0 +1,6 @@
+name: scope-analysis
+description: scope-analysis workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt

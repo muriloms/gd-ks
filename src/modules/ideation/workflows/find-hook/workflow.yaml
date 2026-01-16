@@ -1,0 +1,6 @@
+name: find-hook
+description: find-hook workflow
+steps:
+  - id: start
+    name: Start workflow
+    type: prompt
