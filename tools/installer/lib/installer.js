@@ -110,7 +110,6 @@ export class Installer {
    * Install a specific module
    */
   async installModule(moduleName) {
-    const moduleSource = this.moduleManager.getModulePath(moduleName);
     const moduleTarget = join(this.gdksDir, moduleName);
 
     await this.fileManager.ensureDir(moduleTarget);

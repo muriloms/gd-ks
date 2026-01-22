@@ -65,7 +65,7 @@ export class ModuleManager {
   /**
    * Copy module files to target
    */
-  async copyModuleFiles(sourcePath, targetDir, moduleName) {
+  async copyModuleFiles(sourcePath, targetDir, _moduleName) {
     // Ensure target directories exist
     await this.fileManager.ensureDir(join(targetDir, 'agents'));
     await this.fileManager.ensureDir(join(targetDir, 'workflows'));

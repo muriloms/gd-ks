@@ -1,0 +1,27 @@
+name: audio-implementation
+description: Technical audio implementation guidelines for UE5
+version: 1.0.0
+module: design
+phase: 2
+metadata:
+  display_name: "Audio Implementation"
+  icon: "⚙️"
+  time_estimate: "45-60 minutes"
+  output_path: "_gdks-output/02-design/audio/audio-implementation.md"
+agents:
+  primary: audio-director
+outputs:
+  - audio-implementation.md
+steps:
+  - id: middleware
+    name: "Middleware Setup"
+    type: prompt
+  - id: systems
+    name: "Audio Systems"
+    type: prompt
+  - id: integration
+    name: "UE5 Integration"
+    type: prompt
+  - id: document
+    name: "Generate Implementation Doc"
+    type: template

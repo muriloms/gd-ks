@@ -5,7 +5,7 @@
  */
 
 import chalk from 'chalk';
-import { existsSync, readFileSync } from 'fs';
+import { existsSync } from 'fs';
 import { join } from 'path';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';

@@ -45,15 +45,13 @@ export class AgentCompiler {
   /**
    * Generate Markdown from agent YAML
    */
-  generateMarkdown(agent, config = {}) {
+  generateMarkdown(agent, _config = {}) {
     const meta = agent.metadata || {};
     const persona = agent.persona || {};
     const menu = agent.menu || [];
     const criticalActions = agent.critical_actions || [];
     const memories = agent.memories || [];
 
-    const language = config.language || 'en';
-    
     let md = '';
 
     // Header with XML-like structure for IDE parsing
