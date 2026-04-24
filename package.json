@@ -1,7 +1,7 @@
 {
   "name": "gd-ks",
-  "version": "0.3.0-alpha.1",
-  "description": "Game Development Knowledge System - AI-powered framework for game development with Unreal Engine 5",
+  "version": "0.4.0-beta.2",
+  "description": "Game Development Knowledge System — AI-powered, multi-engine framework for game development (Godot 4, Unity 6, Unreal Engine 5).",
   "type": "module",
   "main": "src/index.js",
   "bin": {
@@ -9,11 +9,23 @@
   },
   "scripts": {
     "start": "node bin/gd-ks.js",
-    "test": "node --test",
-    "lint": "eslint .",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "node --test --test-reporter=spec tests/unit/",
+    "test:integration": "node --test --test-reporter=spec tests/integration/",
+    "test:e2e": "node --test 'tests/e2e/**/*.test.js'",
+    "test:all": "node --test 'tests/**/*.test.js'",
+    "test:coverage": "c8 --reporter=text --reporter=lcov --reporter=html --reports-dir=coverage node --test 'tests/unit/**/*.test.js' 'tests/integration/**/*.test.js'",
+    "test:watch": "node --test --watch 'tests/unit/**/*.test.js'",
+    "validate:schemas": "node scripts/validate-all.js",
+    "validate:agents": "node tools/validator/validator.js --type=agent",
+    "validate:workflows": "node tools/validator/validator.js --type=workflow",
+    "validate:modules": "node tools/validator/validator.js --type=module",
+    "lint": "eslint . --max-warnings=0",
+    "lint:md": "node scripts/lint-markdown.js",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "prepare": "node scripts/prepare.js",
-    "prepublishOnly": "npm run lint"
+    "prepublishOnly": "npm run lint && npm run validate:schemas && npm run test:unit"
   },
   "keywords": [
     "game-development",
@@ -34,16 +46,16 @@
     "indie-game",
     "game-dev-tools"
   ],
-  "author": "Murilo Moro <mrlmoro@gmail.com>",
+  "author": "muriloms",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mrlmoro/gd-ks.git"
+    "url": "git+https://github.com/muriloms/gd-ks.git"
   },
   "bugs": {
-    "url": "https://github.com/mrlmoro/gd-ks/issues"
+    "url": "https://github.com/muriloms/gd-ks/issues"
   },
-  "homepage": "https://github.com/mrlmoro/gd-ks#readme",
+  "homepage": "https://github.com/muriloms/gd-ks#readme",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -56,6 +68,8 @@
     "CHANGELOG.md"
   ],
   "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0",
@@ -64,6 +78,7 @@
     "ora": "^8.1.0"
   },
   "devDependencies": {
+    "c8": "^10.1.3",
     "eslint": "^9.15.0",
     "prettier": "^3.4.2"
   }

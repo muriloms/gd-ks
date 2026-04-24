@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdks.dev/schemas/preset.schema.json",
+  "title": "GD-KS Preset",
+  "description": "Schema for a preset file (src/_config/presets/*.preset.yaml). Presets define which agents/modules are active for a given user profile.",
+  "type": "object",
+  "required": ["schema_version", "preset", "target", "modules_enabled", "agents_active"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "preset": {
+      "type": "object",
+      "required": ["id", "name"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "enum": ["minimal", "solo-indie", "small-studio", "studio", "narrative-heavy", "mobile-casual", "custom"]
+        },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "icon": { "type": "string" }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "team_size": { "type": "string" },
+        "project_scope": { "type": "string" },
+        "typical_duration": { "type": "string" }
+      }
+    },
+    "modules_enabled": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9/-]*$"
+      }
+    },
+    "agents_active": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+      }
+    },
+    "agents_disabled": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "contracts_relaxed": {
+      "type": "object",
+      "description": "Per-contract adjustments. Keys are contract filenames (e.g. 'phase-02-to-03').",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "relaxed_deliverables": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

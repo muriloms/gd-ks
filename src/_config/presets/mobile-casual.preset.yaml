@@ -1,0 +1,59 @@
+schema_version: "1.0"
+preset:
+  id: "mobile-casual"
+  name: "Mobile Casual / F2P"
+  description: "Hypercasual to casual mobile games. Strong progression, economy, and marketing focus. Light on narrative."
+  icon: "📱"
+
+target:
+  team_size: "2-6"
+  project_scope: "small-to-medium"
+  typical_duration: "3-9 months"
+
+modules_enabled:
+  - core
+  - ideation
+  - design
+  - planning
+  - engine
+
+agents_active:
+  core:
+    - gdks-master
+  ideation:
+    - concept-brainstormer
+    - market-analyst
+    - mechanics-explorer
+    - ideation-coordinator
+  design:
+    - game-design-director
+    - mechanics-designer
+    - core-loop-specialist
+    - progression-architect
+    - game-feel-physicist
+    - playtest-coordinator
+    - technical-game-designer
+    - art-director
+    - audio-director
+    - marketing-strategist
+    - design-coordinator
+  planning:
+    - scrum-master
+    - planning-coordinator
+  engine:
+    - ue5-architect
+    - ue5-programmer-lead
+    - engine-coordinator
+
+agents_disabled:
+  - level-designer
+  - narrative-designer
+  - world-builder
+  - character-designer
+  - concept-artist
+  - systems-designer
+  - player-agency-advocate
+  - documentation-specialist
+  - technical-producer
+  - ue5-systems-specialist
+  - ue5-blueprint-specialist

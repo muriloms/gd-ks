@@ -1,0 +1,59 @@
+schema_version: "1.0"
+preset:
+  id: "small-studio"
+  name: "Small Studio (3-10 people)"
+  description: "Complete pipeline for a small studio. All disciplines represented but not every specialist is always needed."
+  icon: "🏢"
+
+target:
+  team_size: "3-10"
+  project_scope: "medium"
+  typical_duration: "9-24 months"
+
+modules_enabled:
+  - core
+  - ideation
+  - design
+  - planning
+  - engine
+
+agents_active:
+  core:
+    - gdks-master
+  ideation:
+    - concept-brainstormer
+    - market-analyst
+    - mechanics-explorer
+    - ideation-coordinator
+  design:
+    - game-design-director
+    - mechanics-designer
+    - core-loop-specialist
+    - progression-architect
+    - systems-designer
+    - game-feel-physicist
+    - player-agency-advocate
+    - technical-game-designer
+    - level-designer
+    - narrative-designer
+    - character-designer
+    - art-director
+    - concept-artist
+    - audio-director
+    - design-coordinator
+  planning:
+    - scrum-master
+    - planning-coordinator
+    - documentation-specialist
+  engine:
+    - ue5-architect
+    - ue5-programmer-lead
+    - ue5-blueprint-specialist
+    - engine-coordinator
+
+agents_disabled:
+  - playtest-coordinator
+  - world-builder
+  - marketing-strategist
+  - technical-producer
+  - ue5-systems-specialist

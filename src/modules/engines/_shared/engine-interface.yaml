@@ -1,0 +1,38 @@
+# Engine Interface — Contract for implementing a new engine module
+#
+# This is a documentation/reference file. Any engine module that ships
+# with GD-KS (or is contributed by the community) MUST provide an
+# `engine-profile.yaml` at its module root that conforms to the
+# `engine-profile.schema.json` schema.
+#
+# See `src/modules/engines/unreal-5/engine-profile.yaml` for a real example,
+# and `docs/adding-new-engine.md` for a full tutorial.
+
+# Minimal required fields:
+# - schema_version: "1.0"
+# - engine.id: lowercase-with-dashes, unique
+# - engine.name: human-readable
+# - paradigms.primary_languages: at least one
+# - agents_provided: at least one agent id
+# - handoff_consumes.from_phase: must be 3
+
+# Optional but recommended:
+# - capabilities.supports_platforms
+# - workflows_provided (with trigger + agent)
+# - planning_template_hints (consumed by Planning phase templates)
+
+# What an engine module's directory should contain:
+#
+#   engines/<engine-id>/
+#   ├── engine-profile.yaml        (this contract)
+#   ├── module.yaml                (same shape as other modules)
+#   ├── agents/
+#   │   └── *.agent.yaml
+#   ├── workflows/
+#   │   └── <workflow-name>/
+#   │       ├── workflow.yaml
+#   │       └── instructions.md
+#   └── knowledge/                 (optional — engine-specific knowledge base)
+#
+# Placeholder engines (godot-4, unity-6) ship with a .placeholder file
+# signaling they're not implemented yet.

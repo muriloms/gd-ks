@@ -1,0 +1,91 @@
+# Godot 4 — Engine Profile
+# Declares the capabilities, idioms, and handoff requirements of the Godot 4 engine module.
+# Consumed by planning templates ({{#engine godot-4}}...{{/engine}}) and by
+# the installer to show what's supported.
+
+schema_version: "1.0"
+
+engine:
+  id: "godot-4"
+  name: "Godot 4"
+  vendor: "Godot Foundation"
+  version_range: "4.0+"
+  documentation_url: "https://docs.godotengine.org/en/stable/"
+
+paradigms:
+  primary_languages:
+    - gdscript
+    - csharp
+  secondary_languages:
+    - cpp           # GDExtension for performance-critical modules
+  has_visual_scripting: false  # Removed in 4.x; signals + nodes cover most cases
+  has_ecs: false
+  has_gas: false
+  rendering:
+    - forward-plus
+    - mobile
+    - compatibility
+
+capabilities:
+  supports_platforms:
+    - pc
+    - console
+    - mobile
+    - web
+  multiplayer:
+    - high-level-multiplayer-api
+    - enet
+    - websocket
+  animation_systems:
+    - animation-player
+    - animation-tree
+    - skeleton2d-animation
+  physics:
+    - godot-physics
+    - jolt-physics     # optional extension
+  audio:
+    - audiostreamplayer
+    - audio-bus-system
+
+# Which agents this engine module brings to the party
+agents_provided:
+  - godot-architect
+  - godot-gdscript-lead
+  - godot-node-specialist
+  - engine-coordinator-godot
+
+# Workflows this engine exposes (triggers without the *)
+workflows_provided:
+  - id: architecture
+    trigger: "godot-architecture"
+    agent: godot-architect
+  - id: scene-specs
+    trigger: "scene-specs"
+    agent: godot-node-specialist
+  - id: code-prompt-godot
+    trigger: "code-prompt-godot"
+    agent: godot-gdscript-lead
+
+# Handoff contract: what Engine Team expects from Planning
+handoff_consumes:
+  from_phase: 3
+  required_deliverables:
+    - sprint-plan
+    - stories
+    - roadmap
+
+# Language/style hints used by planning templates when rendering
+# implementation notes for stories. Other engine profiles override these.
+planning_template_hints:
+  preferred_for_core_logic: "gdscript"
+  preferred_for_designer_tunables: "gdscript"
+  typical_folder_structure:
+    - "scenes/"
+    - "scripts/"
+    - "resources/"
+    - "assets/"
+  story_implementation_note_template: |
+    - Implement core logic in GDScript (prefer static typing: `var speed: float = 100.0`).
+    - Expose designer-tunable parameters with `@export` annotations.
+    - Use signals (`signal name(arg: Type)`) for loose coupling between nodes.
+    - Test interactively in the Godot editor before committing.

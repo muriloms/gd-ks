@@ -68,14 +68,14 @@ export async function info() {
   console.log(`  ${chalk.cyan('🧠 Ideation Team')}   - Brainstorming, concept development`);
   console.log(`  ${chalk.cyan('🎨 Design Team')}     - GDD, level design, art & audio`);
   console.log(`  ${chalk.cyan('📋 Planning Team')}   - Sprint planning, epics, stories`);
-  console.log(`  ${chalk.cyan('⚙️  Engine Team')}     - Unreal Engine 5 implementation`);
+  console.log(`  ${chalk.cyan('⚙️  Engine Team')}     - Engine-specific implementation (pick your engine at install)`);
   console.log('');
 
   // Links
   console.log(chalk.white.bold('Resources:'));
   console.log(chalk.gray('─'.repeat(50)));
-  console.log(`  ${chalk.cyan('Documentation:')} https://github.com/YOUR_USERNAME/gd-ks`);
-  console.log(`  ${chalk.cyan('Issues:')}        https://github.com/YOUR_USERNAME/gd-ks/issues`);
+  console.log(`  ${chalk.cyan('Documentation:')} https://github.com/muriloms/gd-ks`);
+  console.log(`  ${chalk.cyan('Issues:')}        https://github.com/muriloms/gd-ks/issues`);
   console.log(`  ${chalk.cyan('NPM:')}           https://www.npmjs.com/package/gd-ks`);
   console.log('');
 }

@@ -1,0 +1,93 @@
+# Unity 6 — Engine Profile
+# Declares the capabilities, idioms, and handoff requirements of the Unity 6 engine module.
+# Consumed by planning templates ({{#engine unity-6}}...{{/engine}}) and by
+# the installer to show what's supported.
+
+schema_version: "1.0"
+
+engine:
+  id: "unity-6"
+  name: "Unity 6"
+  vendor: "Unity Technologies"
+  version_range: "6.0+"
+  documentation_url: "https://docs.unity3d.com/6000.0/"
+
+paradigms:
+  primary_languages:
+    - csharp
+  secondary_languages:
+    - hlsl          # Shader Graph fallback
+  has_visual_scripting: true   # Unity Visual Scripting (formerly Bolt)
+  has_ecs: true                # Unity DOTS (Entities, Jobs, Burst)
+  has_gas: false
+  rendering:
+    - urp           # Universal Render Pipeline (default for most games)
+    - hdrp          # High-Definition Render Pipeline
+    - built-in
+
+capabilities:
+  supports_platforms:
+    - pc
+    - console
+    - mobile
+    - vr
+    - web
+  multiplayer:
+    - netcode-for-gameobjects
+    - netcode-for-entities
+    - mirror         # popular community option
+  animation_systems:
+    - mecanim
+    - animation-rigging
+    - timeline
+  physics:
+    - physx
+    - physx-2d      # Box2D under the hood
+  audio:
+    - unity-audio
+    - fmod-integration
+    - wwise-integration
+
+# Which agents this engine module brings to the party
+agents_provided:
+  - unity-architect
+  - unity-csharp-lead
+  - unity-prefab-specialist
+  - engine-coordinator-unity
+
+# Workflows this engine exposes (triggers without the *)
+workflows_provided:
+  - id: architecture
+    trigger: "unity-architecture"
+    agent: unity-architect
+  - id: prefab-specs
+    trigger: "prefab-specs"
+    agent: unity-prefab-specialist
+  - id: code-prompt-unity
+    trigger: "code-prompt-unity"
+    agent: unity-csharp-lead
+
+# Handoff contract: what Engine Team expects from Planning
+handoff_consumes:
+  from_phase: 3
+  required_deliverables:
+    - sprint-plan
+    - stories
+    - roadmap
+
+# Language/style hints used by planning templates when rendering
+# implementation notes for stories.
+planning_template_hints:
+  preferred_for_core_logic: "csharp"
+  preferred_for_designer_tunables: "csharp"
+  typical_folder_structure:
+    - "Assets/Scripts/"
+    - "Assets/Prefabs/"
+    - "Assets/ScriptableObjects/"
+    - "Assets/Scenes/"
+  story_implementation_note_template: |
+    - Implement core logic as a `MonoBehaviour` (or `ScriptableObject` for data).
+    - Expose tunables with `[SerializeField]` for inspector editing.
+    - Use the Incremental GC mode to avoid frame-time spikes; consider object pooling for spawning.
+    - Profile with the Unity Profiler (Window → Analysis → Profiler).
+    - Prefer `Addressables` over `Resources.Load` for asset loading.

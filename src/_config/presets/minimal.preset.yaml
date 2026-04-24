@@ -1,0 +1,69 @@
+schema_version: "1.0"
+preset:
+  id: "minimal"
+  name: "Minimal (hobby / game jam)"
+  description: "Smallest set of agents for quick prototyping, game jams, or hobby projects. Skips full documentation rituals."
+  icon: "⚡"
+
+target:
+  team_size: "1"
+  project_scope: "tiny"
+  typical_duration: "48h - 2 weeks"
+
+modules_enabled:
+  - core
+  - ideation
+  - design
+  - engine
+
+agents_active:
+  core:
+    - gdks-master
+  ideation:
+    - concept-brainstormer
+    - mechanics-explorer
+  design:
+    - game-design-director
+    - mechanics-designer
+    - core-loop-specialist
+  planning: []
+  engine:
+    - ue5-architect
+    - engine-coordinator
+
+agents_disabled:
+  - market-analyst
+  - ideation-coordinator
+  - level-designer
+  - narrative-designer
+  - technical-game-designer
+  - art-director
+  - audio-director
+  - design-coordinator
+  - world-builder
+  - character-designer
+  - concept-artist
+  - marketing-strategist
+  - progression-architect
+  - systems-designer
+  - player-agency-advocate
+  - playtest-coordinator
+  - game-feel-physicist
+  - scrum-master
+  - technical-producer
+  - documentation-specialist
+  - planning-coordinator
+  - ue5-programmer-lead
+  - ue5-systems-specialist
+  - ue5-blueprint-specialist
+
+contracts_relaxed:
+  phase-02-to-03:
+    relaxed_deliverables:
+      - story-bible
+      - character-profiles
+      - art-bible
+      - audio-bible
+      - marketing-strategy
+      - level-documentation
+      - progression-system

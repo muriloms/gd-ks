@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdks.dev/schemas/project-state.schema.json",
+  "title": "GD-KS Project State",
+  "description": "Central state file for a user's GD-KS project. Introduced in v0.4 (Sprint 2). This schema is defined in Sprint 1 for forward compatibility.",
+  "type": "object",
+  "required": ["schema_version", "project"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "name", "created_at"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "preset": {
+      "type": "string",
+      "enum": ["minimal", "solo-indie", "small-studio", "studio", "narrative-heavy", "mobile-casual", "custom"]
+    },
+    "target_engine": {
+      "type": "string",
+      "enum": ["unreal-5", "godot-4", "unity-6", "agnostic"]
+    },
+    "language": {
+      "type": "string",
+      "enum": ["en", "pt-BR", "es"]
+    },
+    "current_phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "phases_completed": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1, "maximum": 4 },
+      "uniqueItems": true
+    },
+    "phases_in_progress": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1, "maximum": 4 },
+      "uniqueItems": true
+    },
+    "phase_progress": {
+      "type": "object",
+      "patternProperties": {
+        "^[1-4]$": {
+          "type": "object",
+          "required": ["status"],
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": ["not_started", "in_progress", "completed", "blocked"]
+            },
+            "started_at": { "type": "string", "format": "date-time" },
+            "completed_at": { "type": "string", "format": "date-time" },
+            "completion_pct": { "type": "integer", "minimum": 0, "maximum": 100 },
+            "deliverables": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "path"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "path": { "type": "string" },
+                  "verified": { "type": "boolean" },
+                  "verified_at": { "type": "string", "format": "date-time" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "active_agents": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "phase", "what"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^D\\d{3,}$" },
+          "phase": { "type": "integer", "minimum": 1, "maximum": 4 },
+          "by": { "type": "string" },
+          "what": { "type": "string" },
+          "when": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "text", "status"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^Q\\d{3,}$" },
+          "phase": { "type": "integer", "minimum": 1, "maximum": 4 },
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "text": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "answered", "dropped", "blocker"]
+          }
+        }
+      }
+    }
+  }
+}

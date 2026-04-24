@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdks.dev/schemas/contract.schema.json",
+  "title": "GD-KS Handoff Contract",
+  "description": "Schema for a phase-to-phase handoff contract (e.g., phase-02-to-03.contract.yaml).",
+  "type": "object",
+  "required": ["schema_version", "from_phase", "to_phase", "required_deliverables"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "from_phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "to_phase": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "required_deliverables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "path_glob"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "path_glob": {
+            "type": "string",
+            "description": "Path (relative to project root) of the expected deliverable"
+          },
+          "min_word_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "required_sections": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "required_when": {
+            "type": "object",
+            "description": "Conditional: this deliverable is only required when these conditions match the current project state",
+            "additionalProperties": true,
+            "properties": {
+              "preset": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "target_engine": {
+                "type": "array",
+                "items": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "optional_deliverables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path_glob"],
+        "properties": {
+          "id": { "type": "string" },
+          "path_glob": { "type": "string" }
+        }
+      }
+    },
+    "quality_gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "all_agents_signoff",
+              "no_open_blockers",
+              "min_completion_pct"
+            ]
+          },
+          "description": { "type": "string" },
+          "agents": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      }
+    }
+  }
+}

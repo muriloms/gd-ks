@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdks.dev/schemas/module.schema.json",
+  "title": "GD-KS Module Definition",
+  "description": "Schema for a module.yaml file. Permissive to accept both simple (string array) and rich (object array) agent/workflow definitions found across current modules.",
+  "type": "object",
+  "required": ["name", "version", "description"],
+  "additionalProperties": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "enum": ["core", "ideation", "design", "planning", "engine"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.-]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "default_selected": {
+      "type": "boolean"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "display_name": { "type": "string" },
+        "icon": { "type": "string" },
+        "team_number": { "type": "integer", "minimum": 1, "maximum": 4 },
+        "phase": { "type": "string" },
+        "color": { "type": "string" }
+      }
+    },
+    "overview": {
+      "type": "string"
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+              "name": { "type": "string" },
+              "title": { "type": "string" },
+              "icon": { "type": "string" },
+              "description": { "type": "string" },
+              "primary_workflow": { "type": "string" }
+            }
+          }
+        ]
+      }
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string", "minLength": 2 },
+          {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+              "id": { "type": "string" },
+              "agent": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        ]
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hooks": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,59 @@
+schema_version: "1.0"
+preset:
+  id: "narrative-heavy"
+  name: "Narrative-Heavy (RPG, Visual Novel)"
+  description: "Emphasizes story, characters, lore, and dialogue. Full narrative team + essential design and engine agents."
+  icon: "📖"
+
+target:
+  team_size: "2-8"
+  project_scope: "medium-to-large"
+  typical_duration: "12-36 months"
+
+modules_enabled:
+  - core
+  - ideation
+  - design
+  - planning
+  - engine
+
+agents_active:
+  core:
+    - gdks-master
+  ideation:
+    - concept-brainstormer
+    - mechanics-explorer
+    - ideation-coordinator
+  design:
+    - game-design-director
+    - mechanics-designer
+    - core-loop-specialist
+    - player-agency-advocate
+    - narrative-designer
+    - world-builder
+    - character-designer
+    - art-director
+    - concept-artist
+    - audio-director
+    - technical-game-designer
+    - level-designer
+    - design-coordinator
+  planning:
+    - scrum-master
+    - documentation-specialist
+    - planning-coordinator
+  engine:
+    - ue5-architect
+    - ue5-programmer-lead
+    - ue5-blueprint-specialist
+    - engine-coordinator
+
+agents_disabled:
+  - market-analyst
+  - progression-architect
+  - systems-designer
+  - game-feel-physicist
+  - playtest-coordinator
+  - marketing-strategist
+  - technical-producer
+  - ue5-systems-specialist

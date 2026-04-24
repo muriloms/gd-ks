@@ -52,7 +52,11 @@ menu:
   - trigger: "party"
     workflow: "{module}/workflows/party-mode/workflow.yaml"
     description: "[PA] Party mode - Multi-agent collaboration session"
-  
+
+  - trigger: "tutorial"
+    workflow: "{module}/workflows/tutorial/workflow.yaml"
+    description: "[TU] 🎓 Guided tutorial - Learn GD-KS in ~15 min (Sprint 5)"
+
   # Team navigation
   - trigger: "teams"
     action: "#show-teams"

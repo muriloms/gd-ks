@@ -58,6 +58,13 @@ export class AgentCompiler {
     md += `# ${meta.name || 'Agent'}\n\n`;
     md += `> ${meta.title || 'AI Agent'} ${meta.icon || '🤖'}\n\n`;
 
+    // Project State Context placeholder (v0.4 Sprint 3).
+    // IDEs / tooling can swap this placeholder for the live state
+    // returned by `gd-ks state context`. Agents are instructed to treat
+    // it as the source of truth for project progress when present.
+    md += '<!-- GDKS_STATE_CONTEXT_PLACEHOLDER -->\n';
+    md += '> ℹ️  Current project state will be injected here by `gd-ks state context` or the IDE hook.\n\n';
+
     // Agent Identity Block
     md += '<agent_identity>\n';
     md += `name: ${meta.name || 'Agent'}\n`;

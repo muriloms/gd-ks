@@ -1,0 +1,28 @@
+# GD-KS Unity 6 Engine Module
+# Provides Unity-specific agents and workflows for Phase 4 (Engine)
+
+name: engine
+version: 0.1.0
+description: Unity 6 engine implementation guidance — agents for architecture, C#, prefabs, and ScriptableObject design.
+engine_id: unity-6
+
+metadata:
+  display_name: "Unity 6 Engine"
+  icon: "⬛"
+
+# Agents provided by this engine module
+agents:
+  - unity-architect
+  - unity-csharp-lead
+  - unity-prefab-specialist
+  - engine-coordinator-unity
+
+# Workflows provided by this engine module
+workflows:
+  - unity-architecture
+  - prefab-specs
+  - code-prompt-unity
+
+dependencies:
+  - core
+  - planning

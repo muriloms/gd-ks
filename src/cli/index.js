@@ -83,6 +83,109 @@ export default async function cli() {
       }
     });
 
+  // State command (Sprint 2)
+  program
+    .command('state <subcommand> [text]')
+    .description('Inspect or manage project state (show|history|decision|question|context)')
+    .option('--phase <n>', 'Filter by phase number (for show)')
+    .option('--last <n>', 'Number of history entries to show', '20')
+    .option('--by <agent>', 'Agent making the decision')
+    .option('--from <agent>', 'Agent asking the question')
+    .option('--to <target>', 'Who the question is directed at')
+    .action(async (subcommand, text, options) => {
+      try {
+        const { state } = await import('./commands/state.js');
+        await state(subcommand, { ...options, text });
+      } catch (error) {
+        console.error('State error:', error.message);
+        process.exit(1);
+      }
+    });
+
+  // Validate command (Sprint 2)
+  program
+    .command('validate')
+    .description('Validate that the current phase is ready for handoff')
+    .option('--phase <n>', 'Phase to validate (defaults to current_phase)')
+    .option('--from <n>', 'Explicit from phase')
+    .option('--to <n>', 'Explicit to phase')
+    .action(async (options) => {
+      try {
+        const { validate } = await import('./commands/validate.js');
+        await validate(options);
+      } catch (error) {
+        console.error('Validate error:', error.message);
+        process.exit(1);
+      }
+    });
+
+  // Handoff command (Sprint 2)
+  program
+    .command('handoff')
+    .description('Execute a phase handoff (requires contract check to pass, or --force)')
+    .requiredOption('--from <n>', 'Source phase')
+    .requiredOption('--to <n>', 'Target phase')
+    .option('--dry-run', 'Check contract but do not mutate state')
+    .option('--force', 'Override contract check (with warning)')
+    .action(async (options) => {
+      try {
+        const { handoff } = await import('./commands/handoff.js');
+        await handoff(options);
+      } catch (error) {
+        console.error('Handoff error:', error.message);
+        process.exit(1);
+      }
+    });
+
+  // Preset command (Sprint 4)
+  program
+    .command('preset <subcommand> [text]')
+    .description('Manage active preset (show|list|switch|enable-agent|disable-agent)')
+    .option('--module <id>', 'Target module for enable-agent/disable-agent', 'design')
+    .action(async (subcommand, text, options) => {
+      try {
+        const { preset } = await import('./commands/preset.js');
+        await preset(subcommand, { ...options, text });
+      } catch (error) {
+        console.error('Preset error:', error.message);
+        process.exit(1);
+      }
+    });
+
+  // Rollback command (Sprint 4 bonus)
+  program
+    .command('rollback')
+    .description('Restore project state from a checkpoint')
+    .option('--to <filename>', 'Specific checkpoint filename')
+    .option('--phase <n>', 'Latest checkpoint for a phase')
+    .option('--dry-run', 'Preview changes without applying')
+    .option('-y, --yes', 'Skip confirmation prompt')
+    .action(async (options) => {
+      try {
+        const { rollback } = await import('./commands/rollback.js');
+        await rollback(options);
+      } catch (error) {
+        console.error('Rollback error:', error.message);
+        process.exit(1);
+      }
+    });
+
+  // Tutorial command (Sprint 5)
+  program
+    .command('tutorial')
+    .description('Launch the guided tutorial (prepares sandbox; then type *tutorial in your IDE)')
+    .option('--reset', 'Clear previous tutorial state and sandbox')
+    .option('--info', 'Print the tutorial syllabus without setting up')
+    .action(async (options) => {
+      try {
+        const { tutorial } = await import('./commands/tutorial.js');
+        await tutorial(options);
+      } catch (error) {
+        console.error('Tutorial error:', error.message);
+        process.exit(1);
+      }
+    });
+
   // Parse arguments
   await program.parseAsync(process.argv);
 

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdks.dev/schemas/agent.schema.json",
+  "title": "GD-KS Agent Definition",
+  "description": "Schema for a GD-KS agent YAML file (*.agent.yaml)",
+  "type": "object",
+  "required": ["metadata", "persona"],
+  "additionalProperties": true,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "name", "title", "icon", "module"],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^_gdks/[a-z-]+/agents/[a-z0-9-]+\\.md$",
+          "description": "Compiled markdown path, e.g., '_gdks/design/agents/mechanics-designer.md'"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 30,
+          "description": "Short persona name like 'Marco' or 'GameMaster'"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 80,
+          "description": "Display title like 'Mechanics Designer'"
+        },
+        "icon": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 8,
+          "description": "Single emoji/icon character"
+        },
+        "module": {
+          "type": "string",
+          "enum": ["core", "ideation", "design", "planning", "engine"]
+        },
+        "team": {
+          "type": "string",
+          "description": "Optional team label (informative)"
+        },
+        "team_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "hasSidecar": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "persona": {
+      "type": "object",
+      "required": ["role", "identity"],
+      "additionalProperties": true,
+      "properties": {
+        "role": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 120
+        },
+        "identity": {
+          "type": "string",
+          "minLength": 50
+        },
+        "communication_style": {
+          "type": "string"
+        },
+        "principles": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 3 },
+          "minItems": 0
+        }
+      }
+    },
+    "critical_actions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "memories": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "menu": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["trigger", "description"],
+        "properties": {
+          "trigger": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "description": "Command name WITHOUT the leading asterisk"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 3
+          },
+          "workflow": {
+            "type": "string",
+            "description": "Path to workflow.yaml (can contain {module} variable)"
+          },
+          "action": {
+            "type": "string",
+            "description": "Inline action reference (e.g., '#systems-design')"
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "description": "Map of action names to markdown content",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+---
+description: GD-KS Design Team - Game Design Documentation phase
+globs: _gdks/design/**/*,_gdks-output/02-design/**/*
+alwaysApply: false
+---
+
+# GD-KS Design Team Context
+
+You are working in the **Design Phase** of game development.
+
+## Team Members (18 Agents)
+
+### Documentation Team
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Diana** 🎮 | Game Design Director | GDD, pillars, vision |
+| **Leo** 🗺️ | Level Designer | Layouts, pacing |
+| **Theo** 🔧 | Technical Designer | Balance, data, formulas |
+| **Dylan** 📋 | Coordinator | Review, handoff |
+
+### Core Design Team (NEW v0.3)
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Marco** ⚙️ | Mechanics Designer | Core/secondary mechanics |
+| **Paige** 📈 | Progression Architect | Rewards, unlocks, economy |
+| **Lucas** 🔄 | Core Loop Specialist | Gameplay loops, feedback |
+| **Simon** 🕸️ | Systems Designer | Emergent gameplay |
+| **Ava** 🎯 | Player Agency Advocate | Meaningful choices |
+| **Pete** 🧪 | Playtest Coordinator | Testing, feedback |
+| **Felix** ✨ | Game Feel Physicist | Physics, juice, response |
+
+### Narrative Team
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Nina** 📖 | Narrative Designer | Story, dialogue |
+| **Walter** 🌍 | World Builder | Lore, cultures |
+| **Charlie** 👤 | Character Designer | Profiles, arcs |
+
+### Art & Audio Team
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Aurora** 🎨 | Art Director | Visual style |
+| **Cora** 🖼️ | Concept Artist | Art briefs, specs |
+| **Anton** 🎵 | Audio Director | Music, SFX |
+
+### Marketing Team
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Max** 📣 | Marketing Strategist | Brand, store, trailers |
+
+## Available Workflows
+
+### Core Design (NEW v0.3)
+| Trigger | Workflow | Agent |
+|---------|----------|-------|
+| `*mechanics` | Core Mechanics | Marco |
+| `*progression` | Progression System | Paige |
+| `*loops` | Gameplay Loops | Lucas |
+| `*systems` | Systems Design | Simon |
+| `*agency` | Player Agency | Ava |
+| `*playtest` | Playtest Plan | Pete |
+| `*feel` | Game Feel | Felix |
+| `*balance` | Balance Framework | Theo |
+| `*pillars` | Design Pillars | Diana |
+| `*depth` | Game Depth | Theo |
+| `*pacing` | Pacing Design | Leo |
+
+### Documentation
+| Trigger | Workflow | Description |
+|---------|----------|-------------|
+| `*gdd` | Game Design Document | Full GDD |
+| `*level` | Level Documentation | Level design |
+| `*artbible` | Art Bible | Visual direction |
+| `*audiobible` | Audio Bible | Audio direction |
+
+### Narrative
+| Trigger | Workflow | Description |
+|---------|----------|-------------|
+| `*story` | Story Bible | Narrative foundation |
+| `*characters` | Character Profiles | Character docs |
+| `*lore` | World Lore | History, cultures |
+| `*locations` | Location Design | Places |
+| `*dialogues` | Dialogue Design | Speech patterns |
+| `*quests` | Quest Design | Missions |
+
+### Art & Audio
+| Trigger | Workflow | Description |
+|---------|----------|-------------|
+| `*concept` | Concept Art Briefs | Art briefs |
+| `*charart` | Character Art Specs | Visual specs |
+| `*envart` | Environment Art | Environment specs |
+| `*music` | Music Direction | Soundtrack |
+| `*sfx` | SFX Catalog | Sound effects |
+
+### Marketing
+| Trigger | Workflow | Description |
+|---------|----------|-------------|
+| `*marketing` | Marketing Strategy | Go-to-market |
+| `*store` | Store Page | Steam/Epic content |
+| `*trailer` | Trailer Script | Trailer beats |
+
+## Expected Outputs
+
+```
+_gdks-output/02-design/
+├── gdd/
+├── core-design/              # NEW v0.3
+│   ├── design-pillars.md
+│   ├── mechanics/
+│   ├── loops/
+│   ├── systems/
+│   ├── progression/
+│   ├── balance/
+│   ├── agency/
+│   ├── feel/
+│   ├── playtest/
+│   ├── pacing-design.md
+│   └── depth-analysis.md
+├── narrative/
+├── art/
+├── audio/
+└── marketing/
+```
+
+## Recommended Workflow Order
+
+```
+1. *pillars     → Define 3-4 core design pillars
+2. *mechanics   → Define core and secondary mechanics
+3. *loops       → Design gameplay loops
+4. *systems     → Create system interactions
+5. *feel        → Tune physics and juice
+6. *progression → Design rewards and unlocks
+7. *balance     → Set difficulty curves
+8. *agency      → Validate meaningful choices
+9. *playtest    → Plan testing sessions
+```
+
+## Communication Style
+
+In Design phase:
+- Be thorough and detailed
+- Think about implementation
+- Balance creativity with feasibility
+- Ensure consistency across documents
+- Use the 15 game design skills as reference

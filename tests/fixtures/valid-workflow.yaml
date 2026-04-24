@@ -1,0 +1,36 @@
+name: test-workflow
+title: Test Workflow
+description: A fixture workflow used by the test suite to validate the workflow schema.
+version: 1.0.0
+module: design
+phase: 2
+
+metadata:
+  display_name: 'Test Workflow'
+  icon: '🧪'
+  time_estimate: '5 minutes'
+  difficulty: 'beginner'
+  output_path: '_gdks-output/test/'
+
+agents:
+  primary: test-agent
+  support:
+    - another-test-agent
+
+inputs:
+  required:
+    - some-input.md
+  optional: []
+
+outputs:
+  - test-output.md
+
+steps:
+  - id: step-one
+    name: 'First step'
+    type: prompt
+    description: 'Do the first thing'
+  - id: step-two
+    name: 'Second step'
+    type: template
+    template: 'output.template.md'

@@ -1,0 +1,52 @@
+name: unity-architecture
+description: Design the Unity 6 architecture for the project (folder layout, scene strategy, ScriptableObject patterns, render pipeline)
+version: 1.0.0
+module: engine
+phase: 4
+
+metadata:
+  display_name: "Unity 6 Architecture"
+  icon: "🏗️"
+  time_estimate: "60-90 minutes"
+  difficulty: "advanced"
+  output_path: "_gdks-output/04-engine/unity-architecture.md"
+
+agents:
+  primary: unity-architect
+
+inputs:
+  required:
+    - sprint-plan.md
+    - stories.md
+
+outputs:
+  - unity-architecture.md
+
+steps:
+  - id: review-planning
+    name: "Review Planning Output"
+    type: analysis
+
+  - id: folder-structure
+    name: "Define Folder Structure"
+    type: prompt
+    description: "Assets/_Project/... layout"
+
+  - id: scene-strategy
+    name: "Pick Scene Strategy"
+    type: prompt
+    description: "Additive scenes, persistent scene, UI overlays"
+
+  - id: so-architecture
+    name: "ScriptableObject Architecture"
+    type: prompt
+    description: "Data SO, Event SO, Variable SO patterns"
+
+  - id: pipeline
+    name: "Render Pipeline Choice"
+    type: prompt
+    description: "URP vs HDRP vs Built-in decision"
+
+  - id: document
+    name: "Generate unity-architecture.md"
+    type: template

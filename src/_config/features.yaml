@@ -1,0 +1,37 @@
+# GD-KS Feature Flags
+#
+# Controls experimental features. Values here are defaults — users can
+# override by editing `_gdks/_config/features.yaml` in their project.
+#
+# Introduced in v0.4 Sprint 3.
+
+schema_version: "1.0"
+
+features:
+  engineAgnostic:
+    enabled: true
+    stability: "experimental"
+    description: |
+      New engine-agnostic module layout (src/modules/engines/<engine-id>/).
+      Enables the engine selector in `gd-ks install` and `{{#engine}}`
+      template conditionals. Safe to disable — legacy `engine/` layout
+      is preserved via ModuleManager alias.
+    introduced_in: "0.4.0-alpha.3"
+
+  autoInjectStateContext:
+    enabled: false
+    stability: "experimental"
+    description: |
+      Automatically inject `<project_state_context>` into compiled agent
+      markdown after every state change. When disabled, users run
+      `gd-ks state inject` manually. Default: off until editors signal
+      comfort with the block size.
+    introduced_in: "0.4.0-alpha.3"
+
+  llmApiIntegration:
+    enabled: false
+    stability: "planned"
+    description: |
+      Sprint 6 — opt-in LLM API integration for automatic code
+      generation. Not implemented yet; this flag is a placeholder.
+    introduced_in: "planned-0.5.0"

@@ -1,0 +1,64 @@
+schema_version: "1.0"
+preset:
+  id: "solo-indie"
+  name: "Solo Indie Developer"
+  description: "Perfect for 1-2 devs building a focused game. Balanced between discipline and pragmatism."
+  icon: "🎮"
+
+target:
+  team_size: "1-2"
+  project_scope: "small-to-medium"
+  typical_duration: "3-18 months"
+
+modules_enabled:
+  - core
+  - ideation
+  - design
+  - planning
+  - engine
+
+agents_active:
+  core:
+    - gdks-master
+  ideation:
+    - concept-brainstormer
+    - mechanics-explorer
+    - ideation-coordinator
+  design:
+    - game-design-director
+    - mechanics-designer
+    - core-loop-specialist
+    - game-feel-physicist
+    - technical-game-designer
+    - narrative-designer
+    - art-director
+    - audio-director
+    - design-coordinator
+  planning:
+    - scrum-master
+    - planning-coordinator
+  engine:
+    - ue5-architect
+    - ue5-programmer-lead
+    - engine-coordinator
+
+agents_disabled:
+  - market-analyst
+  - level-designer
+  - progression-architect
+  - systems-designer
+  - player-agency-advocate
+  - playtest-coordinator
+  - world-builder
+  - character-designer
+  - concept-artist
+  - marketing-strategist
+  - technical-producer
+  - documentation-specialist
+  - ue5-systems-specialist
+  - ue5-blueprint-specialist
+
+contracts_relaxed:
+  phase-02-to-03:
+    relaxed_deliverables:
+      - marketing-strategy

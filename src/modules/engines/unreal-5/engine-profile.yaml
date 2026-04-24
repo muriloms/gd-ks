@@ -1,0 +1,92 @@
+# Unreal Engine 5 — Engine Profile
+# Declares the capabilities, idioms, and handoff requirements of this engine module.
+# Consumed by planning templates ({{#engine unreal-5}}...{{/engine}}) and by
+# the installer to show what's supported.
+
+schema_version: "1.0"
+
+engine:
+  id: "unreal-5"
+  name: "Unreal Engine 5"
+  vendor: "Epic Games"
+  version_range: "5.0+"
+  documentation_url: "https://docs.unrealengine.com/5.0/en-US/"
+
+paradigms:
+  primary_languages:
+    - cpp
+    - blueprint
+  secondary_languages:
+    - python       # Editor scripting
+  has_visual_scripting: true
+  has_ecs: false   # Mass Entity exists but is not the default
+  has_gas: true    # Gameplay Ability System
+  rendering:
+    - deferred
+    - nanite
+    - lumen
+
+capabilities:
+  supports_platforms:
+    - pc
+    - console
+    - mobile
+    - vr
+  multiplayer:
+    - listen-server
+    - dedicated-server
+    - client-hosted-p2p
+  animation_systems:
+    - animation-blueprint
+    - control-rig
+    - motion-matching
+  physics:
+    - chaos
+  audio:
+    - metasounds
+    - wwise-integration
+    - fmod-integration
+
+# Which agents this engine module brings to the party
+agents_provided:
+  - ulysses            # UE5 Architect
+  - priscilla          # UE5 Programmer Lead
+  - simon-ue5          # UE5 Systems Specialist
+  - bella              # UE5 Blueprint Specialist
+  - eric               # Engine Coordinator
+
+# Workflows this engine exposes (triggers without the *)
+workflows_provided:
+  - id: architecture
+    trigger: "ue5-architecture"
+    agent: ulysses
+  - id: class-specs
+    trigger: "class-specs"
+    agent: priscilla
+  - id: blueprint-specs
+    trigger: "blueprint-specs"
+    agent: bella
+  - id: code-prompt
+    trigger: "code-prompt"
+    agent: priscilla
+
+# Handoff contract: what Engine Team expects from Planning
+handoff_consumes:
+  from_phase: 3
+  required_deliverables:
+    - sprint-plan
+    - stories
+    - roadmap
+
+# Language/style hints used by planning templates when rendering
+# implementation notes for stories. Other engine profiles will override these.
+planning_template_hints:
+  preferred_for_core_logic: "cpp"
+  preferred_for_designer_tunables: "blueprint"
+  typical_folder_structure:
+    - "Source/<ProjectName>/"
+    - "Content/"
+  story_implementation_note_template: |
+    - Implement core logic in C++ (header/cpp pair).
+    - Expose tunables via UPROPERTY(EditAnywhere, BlueprintReadWrite).
+    - Profile with Unreal Insights.

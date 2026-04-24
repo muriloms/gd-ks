@@ -1,6 +1,11 @@
 /**
  * GD-KS Module Manager
- * Handles module installation and management
+ * Handles module installation and management.
+ *
+ * v0.4 Sprint 3: supports the new `engines/<engine-id>/` layout in
+ * addition to the legacy `modules/engine/` path. When asked for
+ * module `engine`, resolves to `modules/engines/unreal-5/` by default
+ * (or whatever `targetEngine` was configured).
  */
 
 import { join, dirname } from 'path';
@@ -13,20 +18,65 @@ const __dirname = dirname(__filename);
 // Path to source modules
 const SRC_ROOT = join(__dirname, '..', '..', '..', 'src');
 
+// Default engine when 'engine' is requested without an explicit mapping
+const DEFAULT_ENGINE = 'unreal-5';
+
+// Engines marked as available for the installer picker.
+// Entries can have `available: false` to signal placeholder engines (godot, unity).
+const KNOWN_ENGINES = {
+  'unreal-5': { name: 'Unreal Engine 5', available: true },
+  'godot-4': { name: 'Godot 4', available: true },
+  'unity-6': { name: 'Unity 6', available: true }
+};
+
 export class ModuleManager {
-  constructor() {
+  constructor(options = {}) {
     this.fileManager = new FileManager();
-    this.srcRoot = SRC_ROOT;
+    this.srcRoot = options.srcRoot || SRC_ROOT;
+    this.targetEngine = options.targetEngine || DEFAULT_ENGINE;
   }
 
   /**
-   * Get the source path for a module
+   * Get the source path for a module. Supports both legacy and
+   * engine-agnostic layouts.
+   *
+   * - `core` → src/core/
+   * - `engine` → src/modules/engines/<targetEngine>/ (with fallback to legacy engine/)
+   * - any id of the form `engines/<engine-id>` → src/modules/engines/<engine-id>/
+   * - anything else → src/modules/<moduleName>/
    */
   getModulePath(moduleName) {
     if (moduleName === 'core') {
       return join(this.srcRoot, 'core');
     }
+
+    // Engine-agnostic: 'engine' resolves to the configured engine
+    if (moduleName === 'engine') {
+      return join(this.srcRoot, 'modules', 'engines', this.targetEngine);
+    }
+
+    // Explicit engine selection: 'engines/unreal-5'
+    if (moduleName.startsWith('engines/')) {
+      return join(this.srcRoot, 'modules', moduleName);
+    }
+
     return join(this.srcRoot, 'modules', moduleName);
+  }
+
+  /**
+   * List known engines.
+   */
+  static getKnownEngines() {
+    return { ...KNOWN_ENGINES };
+  }
+
+  /**
+   * List engines that are actually implemented (available=true).
+   */
+  static getAvailableEngines() {
+    return Object.entries(KNOWN_ENGINES)
+      .filter(([, info]) => info.available)
+      .map(([id, info]) => ({ id, ...info }));
   }
 
   /**
@@ -165,7 +215,7 @@ export class ModuleManager {
       {
         name: 'engine',
         displayName: 'Engine Team',
-        description: 'Unreal Engine 5 implementation (5 agents)',
+        description: 'Engine-specific implementation (Godot 4 · Unity 6 · Unreal Engine 5)',
         required: false
       }
     ];

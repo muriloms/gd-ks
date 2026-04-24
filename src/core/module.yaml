@@ -26,6 +26,7 @@ workflows:
   - workflow-init
   - workflow-status
   - party-mode
+  - tutorial
 
 # Dependencies
 dependencies: []

@@ -1,5 +1,5 @@
 name: audio-implementation
-description: Technical audio implementation guidelines for UE5
+description: Technical audio implementation guidelines (engine-specific notes via template conditionals)
 version: 1.0.0
 module: design
 phase: 2
@@ -20,8 +20,9 @@ steps:
     name: "Audio Systems"
     type: prompt
   - id: integration
-    name: "UE5 Integration"
+    name: "Engine Integration"
     type: prompt
+    description: "Specific integration notes per active engine (rendered via template conditionals)"
   - id: document
     name: "Generate Implementation Doc"
     type: template

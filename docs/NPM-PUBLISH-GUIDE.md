@@ -26,7 +26,7 @@ npm login
 ### 1.3 Verificar login
 ```bash
 npm whoami
-# Deve mostrar: mrlmoro (ou seu username)
+# Deve mostrar: muriloms (ou seu username)
 ```
 
 ---
@@ -48,7 +48,7 @@ cd gd-ks
 git init
 
 # Adicionar remote
-git remote add origin https://github.com/mrlmoro/gd-ks.git
+git remote add origin https://github.com/muriloms/gd-ks.git
 
 # Criar branch main
 git branch -M main
@@ -182,7 +182,7 @@ npm publish              # para latest
 ### Erro: "Package name too similar"
 ```bash
 # O nome "gd-ks" pode estar muito similar a outro pacote
-# Tente: "gdks" ou "@mrlmoro/gd-ks" (scoped)
+# Tente: "gdks" ou "@muriloms/gd-ks" (scoped)
 ```
 
 ### Erro: "You must be logged in"
@@ -201,7 +201,7 @@ npm publish
 Se `gd-ks` estiver indisponível:
 ```json
 {
-  "name": "@mrlmoro/gd-ks",
+  "name": "@muriloms/gd-ks",
   ...
 }
 ```

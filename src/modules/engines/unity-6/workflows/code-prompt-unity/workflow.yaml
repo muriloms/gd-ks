@@ -1,0 +1,43 @@
+name: code-prompt-unity
+description: Generate an LLM prompt for implementing a story in Unity C#
+version: 1.0.0
+module: engine
+phase: 4
+
+metadata:
+  display_name: "Unity Code Generation Prompt"
+  icon: "🤖"
+  time_estimate: "20-30 minutes per story"
+  difficulty: "intermediate"
+  output_path: "_gdks-output/04-engine/llm-prompts/"
+
+agents:
+  primary: unity-csharp-lead
+
+inputs:
+  required:
+    - stories.md
+    - unity-architecture.md
+    - prefab-specs/
+
+outputs:
+  - llm-prompts/story-XXX-prompt.md
+
+steps:
+  - id: pick-story
+    name: "Pick a Story"
+    type: prompt
+
+  - id: load-context
+    name: "Assemble Project Context"
+    type: analysis
+    description: "Gather architecture, prefab spec, acceptance criteria"
+
+  - id: write-rules
+    name: "Write Rejection Rules"
+    type: prompt
+    description: "public fields, FindObjectOfType, allocations in Update — spell out what to reject"
+
+  - id: document
+    name: "Generate the Prompt"
+    type: template

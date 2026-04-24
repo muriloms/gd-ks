@@ -1,0 +1,10 @@
+# Invalid: missing required fields (name, description)
+# Invalid: phase out of range
+# Invalid: version malformed
+
+title: Broken Workflow
+version: not-a-version
+phase: 99
+module: not-a-valid-module
+
+steps: []

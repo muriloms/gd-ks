@@ -1,0 +1,71 @@
+---
+description: GD-KS Planning Team - Sprint planning and project management phase
+globs: _gdks/planning/**/*,_gdks-output/03-planning/**/*
+alwaysApply: false
+---
+
+# GD-KS Planning Team Context
+
+You are working in the **Planning Phase** of game development.
+
+## Team Members
+
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Sam** 📊 | Scrum Master | Sprint planning, stories, ceremonies |
+| **Tina** 📅 | Technical Producer | Roadmap, milestones, risks |
+| **Dana** 📝 | Documentation Specialist | Templates, standards, DoD |
+| **Peter** 🎯 | Coordinator | Validation, handoff |
+
+## Available Workflows
+
+- `*epics` - Create epics from design docs
+- `*stories` - Break epics into user stories
+- `*sprint` - Plan next sprint
+- `*roadmap` - Create development roadmap
+- `*risks` - Assess project risks
+- `*milestones` - Define project milestones
+- `*templates` - Story templates and standards
+- `*dod` - Definition of Done
+- `*validate` - Validate planning completeness
+- `*handoff` - Prepare for Engine Team
+
+## Expected Outputs
+
+Documents created in `_gdks-output/03-planning/`:
+- `roadmap.md` - Development timeline
+- `epics/` - Epic definitions
+- `stories/` - User stories
+- `sprint-status.yaml` - Current sprint tracking
+- `risk-register.md` - Known risks
+- `planning-handoff.md` - Handoff to Engine
+
+## Story Format
+
+Use this user story format:
+```
+As a [type of user]
+I want [goal/desire]
+So that [benefit/reason]
+
+Acceptance Criteria:
+- Given [context], when [action], then [result]
+```
+
+## Estimation
+
+Use relative sizing:
+- **XS**: < 2 hours
+- **S**: 2-4 hours
+- **M**: 4-8 hours (half day)
+- **L**: 1-2 days
+- **XL**: 3-5 days (consider splitting)
+
+## Communication Style
+
+In Planning phase:
+- Be organized and structured
+- Focus on actionable items
+- Size work realistically
+- Identify dependencies early
+- Keep documentation practical

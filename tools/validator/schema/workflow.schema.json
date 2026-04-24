@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gdks.dev/schemas/workflow.schema.json",
+  "title": "GD-KS Workflow Definition",
+  "description": "Schema for a GD-KS workflow YAML file (workflow.yaml)",
+  "type": "object",
+  "required": ["name", "description"],
+  "additionalProperties": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "minLength": 2,
+      "maxLength": 60
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-z0-9.-]+)?$"
+    },
+    "module": {
+      "type": "string",
+      "enum": ["core", "ideation", "design", "planning", "engine"]
+    },
+    "phase": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "0 = cross-phase / tutorial / infrastructure; 1-4 = regular game dev phase"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "display_name": { "type": "string" },
+        "icon": { "type": "string" },
+        "time_estimate": { "type": "string" },
+        "difficulty": {
+          "type": "string",
+          "enum": ["beginner", "intermediate", "advanced", "expert"]
+        },
+        "output_path": { "type": "string" }
+      }
+    },
+    "agents": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "primary": { "type": "string" },
+        "support": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "inputs": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "required": { "type": "array", "items": { "type": "string" } },
+            "optional": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" },
+              "required": { "type": "boolean" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    "outputs": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name"],
+            "properties": {
+              "name": { "type": "string" },
+              "path": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "prompt",
+              "analysis",
+              "generate",
+              "template",
+              "review",
+              "decision",
+              "display",
+              "interactive",
+              "multi-agent",
+              "read",
+              "read_file",
+              "research",
+              "summary",
+              "validation"
+            ]
+          },
+          "description": { "type": "string" },
+          "template": { "type": "string" }
+        }
+      }
+    },
+    "variables": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

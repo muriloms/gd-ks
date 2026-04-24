@@ -87,11 +87,15 @@ actions:
     5. **Technical Notes** - Implementation hints
     
     ## Next Steps
-    
-    Engine Team leads:
+
+    Engine Team leads (the specific agents depend on the engine
+    selected at install time — see `engine-profile.yaml` of the
+    active engine module).
+
+    For Unreal Engine 5 projects:
     - `@ue5-architect` (Ulysses) - Architecture
     - `@ue5-programmer-lead` (Priscilla) - Implementation
-    
+
     **Ready to hand off?**
   
   planning-checklist: |

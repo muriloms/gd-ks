@@ -7,41 +7,43 @@
 import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
-import { existsSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { Installer } from '../../../tools/installer/index.js';
+
+// Read version dynamically from package.json (fixes v0.3 hardcoded-version bug)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const PKG_PATH = join(__dirname, '..', '..', '..', 'package.json');
+const PKG_VERSION = JSON.parse(readFileSync(PKG_PATH, 'utf8')).version;
 
 // Available modules with descriptions
 const MODULES = {
   core: {
     name: 'Core',
     description: 'Essential system (always installed)',
-    required: true,
-    agents: ['gdks-master']
+    required: true
   },
   ideation: {
     name: 'Ideation Team',
-    description: 'Brainstorming, concept development (4 agents)',
-    required: false,
-    agents: ['concept-brainstormer', 'market-analyst', 'mechanics-explorer', 'ideation-coordinator']
+    description: 'Brainstorming, concept development',
+    required: false
   },
   design: {
     name: 'Design Team',
-    description: 'GDD, level design, narrative, art, audio (7 agents)',
-    required: false,
-    agents: ['game-design-director', 'level-designer', 'narrative-designer', 'technical-game-designer', 'art-director', 'audio-director', 'design-coordinator']
+    description: 'GDD, level design, narrative, art, audio',
+    required: false
   },
   planning: {
     name: 'Planning Team',
-    description: 'Sprint planning, epics, stories (4 agents)',
-    required: false,
-    agents: ['scrum-master', 'technical-producer', 'documentation-specialist', 'planning-coordinator']
+    description: 'Sprint planning, epics, stories',
+    required: false
   },
   engine: {
     name: 'Engine Team',
-    description: 'Unreal Engine 5 implementation (5 agents)',
-    required: false,
-    agents: ['ue5-architect', 'ue5-programmer-lead', 'ue5-systems-specialist', 'ue5-blueprint-specialist', 'engine-coordinator']
+    description: 'Engine-specific implementation (chosen next)',
+    required: false
   }
 };
 
@@ -51,9 +53,12 @@ const MODULES = {
 function showWelcome() {
   console.log('');
   console.log(chalk.cyan('╔══════════════════════════════════════════════════════════════════╗'));
-  console.log(chalk.cyan('║') + chalk.white.bold('            Welcome to GD-KS Installation Wizard                 ') + chalk.cyan('║'));
-  console.log(chalk.cyan('║') + chalk.gray('            Game Development Knowledge System                     ') + chalk.cyan('║'));
+  console.log(chalk.cyan('║') + chalk.white.bold('            Welcome to GD-KS Installation Wizard                  ') + chalk.cyan('║'));
+  console.log(chalk.cyan('║') + chalk.gray('         AI-powered, multi-engine game dev framework              ') + chalk.cyan('║'));
+  console.log(chalk.cyan('║') + chalk.gray('           Unreal Engine 5 · Godot 4 · Unity 6                    ') + chalk.cyan('║'));
   console.log(chalk.cyan('╚══════════════════════════════════════════════════════════════════╝'));
+  console.log('');
+  console.log(chalk.gray(`  Installing into: ${chalk.white(process.cwd())}`));
   console.log('');
 }
 
@@ -73,9 +78,11 @@ async function promptConfiguration(options) {
   if (options.yes) {
     return {
       projectName: 'My Game Project',
+      preset: 'solo-indie',
       modules: ['core', 'ideation', 'design', 'planning', 'engine'],
       outputFolder: '_gdks-output',
       language: 'en',
+      targetEngine: 'unreal-5',
       confirm: true
     };
   }
@@ -93,6 +100,21 @@ async function promptConfiguration(options) {
       message: '🎮 What is your game project name?',
       default: 'My Game Project',
       validate: (input) => input.length > 0 || 'Project name is required'
+    },
+    {
+      type: 'list',
+      name: 'preset',
+      message: '🎯 What best describes your project?',
+      choices: [
+        { name: '🎮 Solo Indie (1-2 devs)           ~16 agents', value: 'solo-indie' },
+        { name: '🏢 Small Studio (3-10 devs)        ~23 agents', value: 'small-studio' },
+        { name: '🏛️  Full Studio (10+ devs, AAA)      32 agents', value: 'studio' },
+        { name: '📖 Narrative-Heavy (RPG, VN)       ~20 agents', value: 'narrative-heavy' },
+        { name: '📱 Mobile Casual / F2P             ~17 agents', value: 'mobile-casual' },
+        { name: '⚡ Minimal (hobby / game jam)       ~8 agents', value: 'minimal' },
+        { name: '🎛️  Custom (all active, tune later)  32 agents', value: 'custom' }
+      ],
+      default: 'solo-indie'
     },
     {
       type: 'checkbox',
@@ -129,6 +151,19 @@ async function promptConfiguration(options) {
         { name: 'None / Other', value: 'none' }
       ],
       default: 'cursor'
+    },
+    {
+      type: 'list',
+      name: 'targetEngine',
+      message: '🎮 Which game engine will you use?',
+      choices: [
+        { name: '🎬 Unreal Engine 5       5 agents  (C++ · Blueprint · GAS)', value: 'unreal-5' },
+        { name: '🟢 Godot 4              4 agents  (GDScript · Scenes · Signals)', value: 'godot-4' },
+        { name: '⬛ Unity 6              4 agents  (C# · Prefabs · ScriptableObjects)', value: 'unity-6' },
+        { name: '🌐 Engine-agnostic       (design & planning only)', value: 'agnostic' }
+      ],
+      default: 'unreal-5',
+      when: (answers) => answers.modules && answers.modules.includes('engine')
     },
     {
       type: 'input',
@@ -201,7 +236,9 @@ export async function install(options) {
     language: config.language,
     outputFolder: config.outputFolder,
     ide: config.ide,
-    installerVersion: '0.1.0-alpha.1'
+    preset: config.preset || 'custom',
+    targetEngine: config.targetEngine || 'unreal-5',
+    installerVersion: PKG_VERSION
   });
 
   // Start installation with spinner
@@ -220,7 +257,7 @@ export async function install(options) {
     spinner.succeed(chalk.green('GD-KS installed successfully!'));
 
     // Show summary
-    showInstallationSummary(config, result);
+    await showInstallationSummary(config, result);
 
   } catch (error) {
     spinner.fail(chalk.red('Installation failed'));
@@ -237,48 +274,88 @@ export async function install(options) {
 /**
  * Show installation summary
  */
-function showInstallationSummary(config, result) {
+async function showInstallationSummary(config, result) {
+  const { readdir } = await import('fs/promises');
+  const { join } = await import('path');
+
+  // Count real agent files installed per module
+  const moduleCounts = {};
+  let totalAgents = 0;
+  for (const mod of config.modules) {
+    const agentsDir = join(result.gdksDir, mod, 'agents');
+    try {
+      const entries = await readdir(agentsDir);
+      const count = entries.filter((f) => f.endsWith('.agent.yaml')).length;
+      moduleCounts[mod] = count;
+      totalAgents += count;
+    } catch {
+      moduleCounts[mod] = 0;
+    }
+  }
+
+  // Human labels for preset + engine
+  const presetLabels = {
+    'minimal': '⚡ Minimal',
+    'solo-indie': '🎮 Solo Indie',
+    'small-studio': '🏢 Small Studio',
+    'studio': '🏛️  Full Studio',
+    'narrative-heavy': '📖 Narrative-Heavy',
+    'mobile-casual': '📱 Mobile Casual',
+    'custom': '🎛️  Custom'
+  };
+  const engineLabels = {
+    'unreal-5': '🎬 Unreal Engine 5',
+    'godot-4': '🟢 Godot 4',
+    'unity-6': '⬛ Unity 6',
+    'agnostic': '🌐 Engine-agnostic'
+  };
+
   console.log('');
   console.log(chalk.cyan('╔══════════════════════════════════════════════════════════════════╗'));
   console.log(chalk.cyan('║') + chalk.white.bold('                    Installation Summary                          ') + chalk.cyan('║'));
   console.log(chalk.cyan('╚══════════════════════════════════════════════════════════════════╝'));
   console.log('');
-  
+
+  // Project configuration -----------------------------------------------------
   console.log(chalk.white('  📋 Project Configuration'));
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
   console.log(`     ${chalk.cyan('Project:')}     ${config.projectName}`);
   console.log(`     ${chalk.cyan('Location:')}    ${result.gdksDir}`);
   console.log(`     ${chalk.cyan('Output:')}      ${result.outputDir}`);
   console.log(`     ${chalk.cyan('Language:')}    ${config.language}`);
+  console.log(`     ${chalk.cyan('Preset:')}      ${presetLabels[config.preset] || config.preset || 'custom'}`);
+  if (config.targetEngine) {
+    console.log(`     ${chalk.cyan('Engine:')}      ${engineLabels[config.targetEngine] || config.targetEngine}`);
+  }
   console.log(`     ${chalk.cyan('IDE:')}         ${config.ide || 'none'}`);
   console.log('');
-  
+
+  // Installed modules ---------------------------------------------------------
   console.log(chalk.white('  📦 Installed Modules'));
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  
-  let totalAgents = 0;
+
   for (const mod of config.modules) {
-    const module = MODULES[mod];
-    const agentCount = module.agents.length;
-    totalAgents += agentCount;
-    console.log(`     ${chalk.green('✓')} ${module.name.padEnd(20)} ${chalk.gray(`(${agentCount} agents)`)}`);
+    const module = MODULES[mod] || { name: mod };
+    const count = moduleCounts[mod] || 0;
+    const label = count === 1 ? 'agent' : 'agents';
+    console.log(`     ${chalk.green('✓')} ${module.name.padEnd(20)} ${chalk.gray(`(${count} ${label})`)}`);
   }
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  console.log(`     ${chalk.white('Total:')} ${totalAgents} agents ready`);
+  console.log(`     ${chalk.white.bold('Total:')} ${chalk.green.bold(totalAgents)} agents ready`);
   console.log('');
 
-  // Show IDE-specific info
+  // IDE configuration ---------------------------------------------------------
   if (config.ide && config.ide !== 'none') {
     console.log(chalk.white('  🖥️  IDE Configuration'));
     console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-    
+
     const ideInfo = {
-      'cursor': { folder: '.cursor/rules/gdks/', activation: 'Rules auto-apply when editing _gdks/ files' },
-      'windsurf': { folder: '.windsurf/', activation: 'Load gdks-rules.md in AI context' },
-      'vscode': { folder: '.vscode/', activation: 'See README.md for setup instructions' },
-      'claude-code': { folder: '.claude/commands/gdks/', activation: 'Use /gdks commands' }
+      'cursor':      { folder: '.cursor/rules/gdks/',     activation: 'Rules auto-apply when editing _gdks/ files' },
+      'windsurf':    { folder: '.windsurf/',              activation: 'Load gdks-rules.md in AI context' },
+      'vscode':      { folder: '.vscode/',                activation: 'See README.md for setup instructions' },
+      'claude-code': { folder: '.claude/commands/gdks/',  activation: 'Use /gdks commands' }
     };
-    
+
     const info = ideInfo[config.ide];
     if (info) {
       console.log(`     ${chalk.cyan('Config folder:')} ${info.folder}`);
@@ -286,33 +363,42 @@ function showInstallationSummary(config, result) {
     }
     console.log('');
   }
-  
+
+  // Next steps ---------------------------------------------------------------
   console.log(chalk.white('  🚀 Next Steps'));
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  
+
   if (config.ide === 'cursor') {
-    console.log(`     1. Open this project in ${chalk.cyan('Cursor')}`);
-    console.log(`     2. The GD-KS rules will auto-apply for ${chalk.yellow('_gdks/')} files`);
-    console.log(`     3. Open ${chalk.yellow('_gdks/core/agents/gdks-master.md')}`);
-    console.log(`     4. Type ${chalk.yellow('*init')} in chat to start!`);
+    console.log(`     ${chalk.cyan('1.')} Open this project in ${chalk.cyan('Cursor')}`);
+    console.log(`     ${chalk.cyan('2.')} GD-KS rules auto-apply when editing ${chalk.yellow('_gdks/')} files`);
+    console.log(`     ${chalk.cyan('3.')} Open ${chalk.yellow('_gdks/core/agents/gdks-master.md')} in chat`);
+    console.log(`     ${chalk.cyan('4.')} Try ${chalk.yellow('*tutorial')} for a 15-min guided walkthrough`);
   } else {
-    console.log(`     1. Open your project in ${chalk.cyan('Cursor')}, ${chalk.cyan('Windsurf')}, or ${chalk.cyan('VS Code')}`);
-    console.log(`     2. Add ${chalk.yellow('_gdks/core/agents/gdks-master.md')} to your AI context`);
-    console.log(`     3. Type ${chalk.yellow('*init')} to initialize your project`);
-    console.log('     4. Follow the agent\'s guidance!');
+    console.log(`     ${chalk.cyan('1.')} Open your project in ${chalk.cyan('Cursor')}, ${chalk.cyan('Windsurf')}, or ${chalk.cyan('VS Code')}`);
+    console.log(`     ${chalk.cyan('2.')} Add ${chalk.yellow('_gdks/core/agents/gdks-master.md')} to your AI context`);
+    console.log(`     ${chalk.cyan('3.')} Try ${chalk.yellow('*tutorial')} for a 15-min guided walkthrough`);
+    console.log(`     ${chalk.cyan('4.')} Or type ${chalk.yellow('*init')} to start your real project`);
   }
   console.log('');
-  
+
+  // Quick reference -----------------------------------------------------------
   console.log(chalk.white('  💡 Quick Reference'));
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  console.log(`     ${chalk.yellow('*init')}      Initialize project and select track`);
-  console.log(`     ${chalk.yellow('*status')}    Check workflow progress`);
-  console.log(`     ${chalk.yellow('*teams')}     View all teams and agents`);
-  console.log(`     ${chalk.yellow('*help')}      Show available commands`);
+  console.log(`     ${chalk.white('In your IDE chat:')}`);
+  console.log(`       ${chalk.yellow('*tutorial')}  15-min guided walkthrough`);
+  console.log(`       ${chalk.yellow('*help')}      Show available commands`);
+  console.log(`       ${chalk.yellow('*teams')}     View all teams and agents`);
+  console.log(`       ${chalk.yellow('*status')}    Check workflow progress`);
   console.log('');
-  
+  console.log(`     ${chalk.white('In your terminal:')}`);
+  console.log(`       ${chalk.yellow('gd-ks state show')}        Inspect project state`);
+  console.log(`       ${chalk.yellow('gd-ks preset show')}       Inspect active preset`);
+  console.log(`       ${chalk.yellow('gd-ks validate --phase=1')} Check handoff readiness`);
+  console.log(`       ${chalk.yellow('gd-ks tutorial')}          Bootstrap tutorial sandbox`);
+  console.log('');
+
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
-  console.log(chalk.gray(`  Documentation: ${chalk.cyan('https://github.com/mrlmoro/gd-ks')}`));
-  console.log(chalk.gray(`  Issues: ${chalk.cyan('https://github.com/mrlmoro/gd-ks/issues')}`));
+  console.log(chalk.gray(`  Documentation: ${chalk.cyan('https://github.com/muriloms/gd-ks')}`));
+  console.log(chalk.gray(`  Issues:        ${chalk.cyan('https://github.com/muriloms/gd-ks/issues')}`));
   console.log('');
 }

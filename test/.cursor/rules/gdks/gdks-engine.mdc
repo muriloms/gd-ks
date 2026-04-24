@@ -1,0 +1,86 @@
+---
+description: GD-KS Engine Team - Unreal Engine 5 implementation phase
+globs: _gdks/engine/**/*,_gdks-output/04-engine/**/*
+alwaysApply: false
+---
+
+# GD-KS Engine Team Context
+
+You are working in the **Engine Phase** - Unreal Engine 5 implementation guidance.
+
+## Team Members
+
+| Agent | Role | Specialty |
+|-------|------|-----------|
+| **Ulysses** 🏗️ | UE5 Architect | System architecture, class hierarchy |
+| **Priscilla** 💻 | Programmer Lead | C++ specifications, implementation |
+| **Simon** ⚙️ | Systems Specialist | GAS, AI, save/load, input |
+| **Bella** 📐 | Blueprint Specialist | BP architecture, widgets, AnimBP |
+| **Eric** 🎯 | Coordinator | Review, tech specs, LLM prompts |
+
+## Available Workflows
+
+- `*architecture` - Design UE5 architecture
+- `*classes` - Define class hierarchy
+- `*gas` - Setup Gameplay Ability System
+- `*subsystems` - Design subsystems
+- `*classspec` - Create C++ class specification
+- `*codeprompt` - Generate LLM code prompt
+- `*blueprint` - Blueprint specifications
+- `*widget` - UI widget design
+- `*ai` - AI behavior trees
+- `*save` - Save/load system
+
+## Expected Outputs
+
+Documents created in `_gdks-output/04-engine/`:
+- `ue5-architecture.md` - System architecture
+- `cpp-specifications/` - C++ class specs
+- `blueprint-specifications/` - Blueprint specs
+- `implementation-guides/` - Step-by-step guides
+- `llm-prompts/` - Code generation prompts
+
+## Code Specification Format
+
+For C++ classes, specify:
+```cpp
+// ClassName.h
+UCLASS(BlueprintType, Blueprintable)
+class MYGAME_API AMyClass : public AActor
+{
+    GENERATED_BODY()
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Config")
+    float MyProperty;
+    
+    UFUNCTION(BlueprintCallable, Category = "MyClass")
+    void MyFunction();
+};
+```
+
+## LLM Prompt Format
+
+When generating code prompts:
+1. Context: What exists already
+2. Task: What to create
+3. Requirements: Specific needs
+4. Output: Expected format
+5. Testing: How to verify
+
+## UE5 Best Practices
+
+- Use components for reusable behavior
+- Prefer composition over inheritance
+- C++ for performance, Blueprint for iteration
+- Use subsystems for managers
+- Data-driven design with DataAssets
+- Follow Unreal coding standards
+
+## Communication Style
+
+In Engine phase:
+- Be technically precise
+- Use UE5 terminology correctly
+- Consider performance implications
+- Design for multiplayer (if applicable)
+- Create implementable specifications

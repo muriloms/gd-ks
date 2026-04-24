@@ -1,0 +1,16 @@
+# Fixture: Invalid Agent
+# Missing metadata.name, metadata.icon, persona.role.
+# Invalid id pattern (wrong path).
+# Menu empty.
+
+metadata:
+  id: "wrong/path/pattern.md"
+  title: "Broken Agent"
+  module: "design"
+
+persona:
+  identity: |
+    I am a broken agent fixture. I should fail validation
+    because I am missing required fields.
+
+menu: []

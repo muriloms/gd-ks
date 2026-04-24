@@ -1,0 +1,52 @@
+name: prefab-specs
+description: Produce prefab specifications per story, with variant strategies and Addressables groups
+version: 1.0.0
+module: engine
+phase: 4
+
+metadata:
+  display_name: "Unity Prefab Specifications"
+  icon: "🧩"
+  time_estimate: "30-60 minutes per story"
+  difficulty: "intermediate"
+  output_path: "_gdks-output/04-engine/prefab-specs/"
+
+agents:
+  primary: unity-prefab-specialist
+
+inputs:
+  required:
+    - stories.md
+    - unity-architecture.md
+
+outputs:
+  - prefab-specs/*.md
+
+steps:
+  - id: pick-story
+    name: "Pick a Story"
+    type: prompt
+
+  - id: identify-components
+    name: "Identify Required Components"
+    type: prompt
+    description: "What built-in MonoBehaviours / custom scripts does it need?"
+
+  - id: compose
+    name: "Compose Prefab Hierarchy"
+    type: prompt
+    description: "Root + children + nested prefabs"
+
+  - id: variants
+    name: "Plan Variants"
+    type: prompt
+    description: "Is this a base prefab or a variant?"
+
+  - id: exports
+    name: "Define Serialized Fields"
+    type: prompt
+    description: "What [SerializeField]s and ScriptableObjects does it reference?"
+
+  - id: document
+    name: "Generate prefab spec"
+    type: template

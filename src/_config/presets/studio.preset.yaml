@@ -1,0 +1,59 @@
+schema_version: "1.0"
+preset:
+  id: "studio"
+  name: "Full Studio (10+ people, AAA)"
+  description: "Every agent active. For AAA studios, educational use, or when you want the complete GD-KS experience."
+  icon: "🏛️"
+
+target:
+  team_size: "10+"
+  project_scope: "large"
+  typical_duration: "24+ months"
+
+modules_enabled:
+  - core
+  - ideation
+  - design
+  - planning
+  - engine
+
+agents_active:
+  core:
+    - gdks-master
+  ideation:
+    - concept-brainstormer
+    - market-analyst
+    - mechanics-explorer
+    - ideation-coordinator
+  design:
+    - game-design-director
+    - mechanics-designer
+    - core-loop-specialist
+    - progression-architect
+    - systems-designer
+    - game-feel-physicist
+    - player-agency-advocate
+    - playtest-coordinator
+    - technical-game-designer
+    - level-designer
+    - narrative-designer
+    - world-builder
+    - character-designer
+    - art-director
+    - concept-artist
+    - audio-director
+    - marketing-strategist
+    - design-coordinator
+  planning:
+    - scrum-master
+    - technical-producer
+    - documentation-specialist
+    - planning-coordinator
+  engine:
+    - ue5-architect
+    - ue5-programmer-lead
+    - ue5-systems-specialist
+    - ue5-blueprint-specialist
+    - engine-coordinator
+
+agents_disabled: []
