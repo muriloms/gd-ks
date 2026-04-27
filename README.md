@@ -289,7 +289,7 @@ If you use GD-KS in academic work, please cite the project:
   title = {GD-KS: A Multi-Agent, Multi-Engine Framework for
            AI-Assisted Game Development},
   year = {2026},
-  version = {v0.4.0-beta.2},
+  version = {v0.4.1-beta.2},
   url = {https://github.com/muriloms/gd-ks},
   license = {MIT}
 }
