@@ -71,7 +71,7 @@ function showWelcome() {
   console.log(chalk.cyan('  │') + '   🎬 Unreal Engine 5    🟢 Godot 4    ⬛ Unity 6                ' + chalk.cyan('│'));
   console.log(chalk.cyan('  ├────────────────────────────────────────────────────────────────┤'));
   console.log(chalk.cyan('  │') + chalk.gray('   Developed by ') + chalk.magenta.bold('RE-G3X') + chalk.gray(' — Research Group on Digital Games        ') + chalk.cyan('│'));
-  console.log(chalk.cyan('  │') + chalk.gray('   ') + chalk.cyan.underline('https://re-g3x.github.io') + chalk.gray('                                     ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.gray('   ') + chalk.cyan.underline('https://re-g3x.github.io/homepage/') + chalk.gray('                                     ') + chalk.cyan('│'));
   console.log(chalk.cyan('  ╰────────────────────────────────────────────────────────────────╯'));
   console.log('');
   console.log(chalk.gray('     Installing into: ') + chalk.white.bold(process.cwd()));
@@ -418,6 +418,6 @@ async function showInstallationSummary(config, result) {
   console.log(chalk.gray(`  Issues:        ${chalk.cyan('https://github.com/muriloms/gd-ks/issues')}`));
   console.log('');
   console.log(chalk.gray(`  Developed by ${chalk.magenta.bold('RE-G3X')} — Research Group on Digital Games`));
-  console.log(chalk.gray(`  ${chalk.cyan.underline('https://re-g3x.github.io')}`));
+  console.log(chalk.gray(`  ${chalk.cyan.underline('https://re-g3x.github.io/homepage/')}`));
   console.log('');
 }

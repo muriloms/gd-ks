@@ -3,11 +3,11 @@
 [![npm version](https://img.shields.io/npm/v/gd-ks.svg)](https://www.npmjs.com/package/gd-ks)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/node/v/gd-ks.svg)](https://nodejs.org)
-[![Developed by RE-G3X](https://img.shields.io/badge/Developed%20by-RE--G3X-blueviolet)](https://re-g3x.github.io)
+[![Developed by RE-G3X](https://img.shields.io/badge/Developed%20by-RE--G3X-blueviolet)](https://re-g3x.github.io/homepage/)
 
 **AI-powered, multi-engine framework for game development.**
 
-> Developed by **[RE-G3X](https://re-g3x.github.io)** — a research group dedicated to scientific research in digital games.
+> Developed by **[RE-G3X](https://re-g3x.github.io/homepage/)** — a research group dedicated to scientific research in digital games.
 
 GD-KS gives you a team of specialized AI agents that walk you from a blank page to implementation-ready specs — through brainstorming, design, planning, and engine-specific implementation guidance. Works with **Unreal Engine 5**, **Godot 4**, and **Unity 6**.
 
@@ -279,7 +279,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## 🔬 About RE-G3X
 
-GD-KS is developed by **[RE-G3X](https://re-g3x.github.io)** — a research group dedicated to the scientific study of digital games. The group investigates topics at the intersection of game development, AI-assisted tooling, generative pipelines, and player experience.
+GD-KS is developed by **[RE-G3X](https://re-g3x.github.io/homepage/)** — a research group dedicated to the scientific study of digital games. The group investigates topics at the intersection of game development, AI-assisted tooling, generative pipelines, and player experience.
 
 If you use GD-KS in academic work, please cite the project:
 
@@ -295,7 +295,7 @@ If you use GD-KS in academic work, please cite the project:
 }
 ```
 
-🌐 Website: **[https://re-g3x.github.io](https://re-g3x.github.io)**
+🌐 Website: **[https://re-g3x.github.io/homepage/](https://re-g3x.github.io/homepage/)**
 
 ---
 
@@ -305,6 +305,6 @@ Inspired by the [BMAD-METHOD](https://github.com/bmad-code-org/BMAD-METHOD) fram
 
 ---
 
-**Made with ❤️ by [RE-G3X](https://re-g3x.github.io) for indie game developers, solo devs, and studios of every size.**
+**Made with ❤️ by [RE-G3X](https://re-g3x.github.io/homepage/) for indie game developers, solo devs, and studios of every size.**
 
-[Report a bug](https://github.com/muriloms/gd-ks/issues) · [Request a feature](https://github.com/muriloms/gd-ks/issues) · [npm package](https://www.npmjs.com/package/gd-ks) · [RE-G3X](https://re-g3x.github.io)
+[Report a bug](https://github.com/muriloms/gd-ks/issues) · [Request a feature](https://github.com/muriloms/gd-ks/issues) · [npm package](https://www.npmjs.com/package/gd-ks) · [RE-G3X](https://re-g3x.github.io/homepage/)
