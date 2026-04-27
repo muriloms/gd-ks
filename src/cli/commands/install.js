@@ -51,14 +51,30 @@ const MODULES = {
  * Display welcome banner
  */
 function showWelcome() {
+  // Border width: 64 cells. Each line below targets exactly 64 visual cells
+  // (note: emojis render as 2 cells; box-drawing chars as 1 cell each)
   console.log('');
-  console.log(chalk.cyan('╔══════════════════════════════════════════════════════════════════╗'));
-  console.log(chalk.cyan('║') + chalk.white.bold('            Welcome to GD-KS Installation Wizard                  ') + chalk.cyan('║'));
-  console.log(chalk.cyan('║') + chalk.gray('         AI-powered, multi-engine game dev framework              ') + chalk.cyan('║'));
-  console.log(chalk.cyan('║') + chalk.gray('           Unreal Engine 5 · Godot 4 · Unity 6                    ') + chalk.cyan('║'));
-  console.log(chalk.cyan('╚══════════════════════════════════════════════════════════════════╝'));
+  console.log(chalk.cyan('  ╭────────────────────────────────────────────────────────────────╮'));
+  console.log(chalk.cyan('  │') + '                                                                ' + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('       ██████╗  ██████╗      ██╗  ██╗ ███████╗                  ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('      ██╔════╝  ██╔══██╗     ██║ ██╔╝ ██╔════╝                  ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('      ██║  ███╗ ██║  ██║     █████╔╝  ███████╗                  ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('      ██║   ██║ ██║  ██║     ██╔═██╗  ╚════██║                  ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('      ╚██████╔╝ ██████╔╝     ██║  ██╗ ███████║                  ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('       ╚═════╝  ╚═════╝      ╚═╝  ╚═╝ ╚══════╝                  ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + '                                                                ' + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.bold.white('             Game Development Knowledge System                 ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.gray(`             v${PKG_VERSION.padEnd(13)} ·  Build Games, Not Documents    `) + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + '                                                                ' + chalk.cyan('│'));
+  console.log(chalk.cyan('  ├────────────────────────────────────────────────────────────────┤'));
+  console.log(chalk.cyan('  │') + chalk.gray('   AI-powered · Multi-engine · Multi-agent · Open source        ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + '   🎬 Unreal Engine 5    🟢 Godot 4    ⬛ Unity 6                ' + chalk.cyan('│'));
+  console.log(chalk.cyan('  ├────────────────────────────────────────────────────────────────┤'));
+  console.log(chalk.cyan('  │') + chalk.gray('   Developed by ') + chalk.magenta.bold('RE-G3X') + chalk.gray(' — Research Group on Digital Games        ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  │') + chalk.gray('   ') + chalk.cyan.underline('https://re-g3x.github.io') + chalk.gray('                                     ') + chalk.cyan('│'));
+  console.log(chalk.cyan('  ╰────────────────────────────────────────────────────────────────╯'));
   console.log('');
-  console.log(chalk.gray(`  Installing into: ${chalk.white(process.cwd())}`));
+  console.log(chalk.gray('     Installing into: ') + chalk.white.bold(process.cwd()));
   console.log('');
 }
 
@@ -400,5 +416,8 @@ async function showInstallationSummary(config, result) {
   console.log(chalk.gray('  ─────────────────────────────────────────────────────'));
   console.log(chalk.gray(`  Documentation: ${chalk.cyan('https://github.com/muriloms/gd-ks')}`));
   console.log(chalk.gray(`  Issues:        ${chalk.cyan('https://github.com/muriloms/gd-ks/issues')}`));
+  console.log('');
+  console.log(chalk.gray(`  Developed by ${chalk.magenta.bold('RE-G3X')} — Research Group on Digital Games`));
+  console.log(chalk.gray(`  ${chalk.cyan.underline('https://re-g3x.github.io')}`));
   console.log('');
 }

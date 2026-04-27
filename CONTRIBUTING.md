@@ -6,7 +6,7 @@ Thank you for your interest in contributing to GD-KS! This document provides gui
 
 ### Reporting Bugs
 
-1. Check if the bug has already been reported in [Issues](https://github.com/YOUR_USERNAME/gd-ks/issues)
+1. Check if the bug has already been reported in [Issues](https://github.com/muriloms/gd-ks/issues)
 2. If not, create a new issue with:
    - Clear title and description
    - Steps to reproduce
@@ -15,7 +15,7 @@ Thank you for your interest in contributing to GD-KS! This document provides gui
 
 ### Suggesting Features
 
-1. Check existing [Issues](https://github.com/YOUR_USERNAME/gd-ks/issues) for similar suggestions
+1. Check existing [Issues](https://github.com/muriloms/gd-ks/issues) for similar suggestions
 2. Create a new issue with:
    - Clear description of the feature
    - Use case and benefits
@@ -35,7 +35,7 @@ Thank you for your interest in contributing to GD-KS! This document provides gui
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/gd-ks.git
+git clone https://github.com/muriloms/gd-ks.git
 cd gd-ks
 
 # Install dependencies

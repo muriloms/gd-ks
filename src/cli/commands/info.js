@@ -78,4 +78,11 @@ export async function info() {
   console.log(`  ${chalk.cyan('Issues:')}        https://github.com/muriloms/gd-ks/issues`);
   console.log(`  ${chalk.cyan('NPM:')}           https://www.npmjs.com/package/gd-ks`);
   console.log('');
+
+  // Attribution
+  console.log(chalk.white.bold('About:'));
+  console.log(chalk.gray('─'.repeat(50)));
+  console.log(`  Developed by ${chalk.magenta.bold('RE-G3X')} — Research Group on Digital Games`);
+  console.log(`  ${chalk.cyan.underline('https://re-g3x.github.io')}`);
+  console.log('');
 }

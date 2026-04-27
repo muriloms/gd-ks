@@ -26,7 +26,7 @@ npm login
 ### 1.3 Verificar login
 ```bash
 npm whoami
-# Deve mostrar: muriloms (ou seu username)
+# Deve mostrar: mrlmoro (ou seu username)
 ```
 
 ---
